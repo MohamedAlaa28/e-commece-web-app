@@ -5,6 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import { SportsEsportsOutlined, ElectricBikeOutlined, LaptopChromebookOutlined, MenuBookOutlined, Close } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import HeaderLinks from "./HeaderLinks";
 
 function Header() {
   const desktop = useMediaQuery('(min-width:1200px)');
@@ -115,6 +116,17 @@ function Header() {
           ))}
         </Menu>
       </Box>
+
+      {desktop &&
+        <Stack direction={"row"} gap={4} alignItems={"center"}>
+          <HeaderLinks title={"Home"} />
+          <HeaderLinks title={"Mega Menu"} />
+          <HeaderLinks title={"Full Screen Menu"} />
+          <HeaderLinks title={"Pages"} />
+          <HeaderLinks title={"User Account"} />
+          <HeaderLinks title={"Vendor Account"} />
+        </Stack>
+      }
 
       {mobile &&
         <IconButton onClick={toggleDrawer("top", true)}>

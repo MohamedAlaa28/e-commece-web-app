@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { createTheme, Theme } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 
@@ -12,9 +12,20 @@ const ColorModeContext = createContext<ColorModeContextType | undefined>(
 );
 
 export const useMode = (): [Theme, ColorModeContextType] => {
-  const [mode, setMode] = useState(
-    (localStorage.getItem("mode") as "light" | "dark") ?? "light"
-  );
+  // const [mode, setMode] = useState(
+  //   (localStorage.getItem("mode") as "light" | "dark") ?? "light"
+  // );
+
+  // Initialize state without localStorage
+  const [mode, setMode] = useState<"light" | "dark">("light");
+
+  // Use useEffect to update the state with localStorage value after component mounts
+  useEffect(() => {
+    const storedMode = localStorage.getItem("mode") as "light" | "dark";
+    if (storedMode) {
+      setMode(storedMode);
+    }
+  }, []);
 
   const colorMode = useMemo(
     () => ({
