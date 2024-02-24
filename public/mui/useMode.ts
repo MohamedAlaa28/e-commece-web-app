@@ -58,7 +58,7 @@ export const useMode = (): [Theme, ColorModeContextType] => {
                   main: "#F6F9FC",
                 },
                 bg:{
-                  main:"#F6F6F6";
+                  main:"#F6F6F6",
                 }
               }
             : {

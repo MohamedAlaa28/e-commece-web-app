@@ -44,7 +44,7 @@ const Hero = () => {
 
     return (
         <Container >
-            <Box sx={{ position: 'relative', display: "flex", alignItems: "center", gap: 2, mt: 2.5 }}>
+            <Box sx={{ position: 'relative', display: "flex", alignItems: "center", gap: 2, mt: 2.5, pt: 2 }}>
                 <Box sx={{ flexGrow: 1, position: 'relative', minWidth: '70%', height: '30rem' }}>
 
                     <Swiper

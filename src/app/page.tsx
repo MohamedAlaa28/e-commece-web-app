@@ -1,6 +1,6 @@
 "use client"
 import styles from "./page.module.css";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from '../../public/mui/useMode';
 import Navbar from "./components/Header";
 import SearchBar from "./components/searchBar/SearchBar";
@@ -18,7 +18,13 @@ function Home() {
           <Navbar />
           <SearchBar />
           <Header />
-          <Hero />
+
+          <Box bgcolor={
+            // @ts-ignore
+            theme.palette.bg.main}>
+            <Hero />
+          </Box>
+
         </main>
       </ThemeProvider>
     </ColorModeContext.Provider>
