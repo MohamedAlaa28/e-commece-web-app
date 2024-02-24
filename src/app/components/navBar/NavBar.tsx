@@ -5,9 +5,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import { SportsEsportsOutlined, ElectricBikeOutlined, LaptopChromebookOutlined, MenuBookOutlined, Close } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import HeaderLinks from "./HeaderLinks";
+import HeaderLinks from "./NavBarLinks";
 
-function Header() {
+const NavBar = () => {
   const desktop = useMediaQuery('(min-width:1200px)');
   const mobile = useMediaQuery('(max-width:1200px)');
 
@@ -196,4 +196,4 @@ function Header() {
   )
 }
 
-export default Header
+export default NavBar

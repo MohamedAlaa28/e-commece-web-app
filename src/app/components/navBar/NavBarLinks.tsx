@@ -19,7 +19,7 @@ const menuItems = [
 type prop = {
     title: string;
 }
-function HeaderLinks({ title }: prop) {
+const NavBarLinks = ({ title }: prop) => {
     return (
         <Box sx={{ position: "relative", display: "flex", alignItems: "center", ":hover .hover-menu": { display: "block" } }}>
             <Typography variant="body1">
@@ -28,7 +28,7 @@ function HeaderLinks({ title }: prop) {
 
             <ExpandMore sx={{ fontSize: "16px", ml: 1 }} />
 
-            <Box className="hover-menu" sx={{ position: "absolute", top: "100%", minWidth: "170px", transform: "TranslateX(-50%)", left: "50%", display: "none" }}>
+            <Box className="hover-menu" sx={{ zIndex: "2", position: "absolute", top: "100%", minWidth: "170px", transform: "TranslateX(-50%)", left: "50%", display: "none" }}>
                 <Paper sx={{ mt: 2 }}>
                     <nav aria-label="secondary mailbox folders">
                         <List>
@@ -83,4 +83,4 @@ function HeaderLinks({ title }: prop) {
     )
 }
 
-export default HeaderLinks
+export default NavBarLinks

@@ -1,10 +1,11 @@
 "use client"
 import styles from "./page.module.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { ColorModeContext, useMode } from '../../public/mui/theme';
-import Navbar from "./components/Navbar";
-import SearchBar from "./components/SearchBar";
-import Header from "./components/Header/Header";
+import { ColorModeContext, useMode } from '../../public/mui/useMode';
+import Navbar from "./components/Header";
+import SearchBar from "./components/searchBar/SearchBar";
+import Header from "./components/navBar/NavBar";
+import Hero from "./components/hero/Hero";
 
 function Home() {
   const [theme, colorMode] = useMode();
@@ -17,6 +18,7 @@ function Home() {
           <Navbar />
           <SearchBar />
           <Header />
+          <Hero />
         </main>
       </ThemeProvider>
     </ColorModeContext.Provider>

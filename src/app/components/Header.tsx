@@ -4,11 +4,11 @@ import { DarkModeOutlined, ExpandMore, LightModeOutlined } from "@mui/icons-mate
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import { ColorModeContext } from '../../../public/mui/theme';
+import { ColorModeContext } from '../../../public/mui/useMode';
 
 const options = ["AR", "EN"];
 
-function Navbar() {
+const Header = () => {
     const colorMode = useContext(ColorModeContext);
     if (!colorMode) {
         throw new Error('ColorModeContext not found');
@@ -139,4 +139,4 @@ function Navbar() {
     );
 };
 
-export default Navbar;
+export default Header;

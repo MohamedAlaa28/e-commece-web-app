@@ -57,6 +57,9 @@ export const useMode = (): [Theme, ColorModeContextType] => {
                 header: {
                   main: "#F6F9FC",
                 },
+                bg:{
+                  main:"#F6F6F6";
+                }
               }
             : {
                 neutral: {
@@ -71,6 +74,9 @@ export const useMode = (): [Theme, ColorModeContextType] => {
                 header: {
                   main: "#252b32",
                 },
+                bg:{
+                  main:"#1D2021",
+                }
               }),
         },
       }),

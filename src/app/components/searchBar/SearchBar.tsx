@@ -3,12 +3,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import { ExpandMore } from "@mui/icons-material";
-import { StyledBadge, StyledInputBase, SearchIconWrapper, Search } from "../../../public/mui/muiStyle";
+import { StyledBadge, StyledInputBase, SearchIconWrapper, Search } from "./muiSearchBarStyle";
 import { useState } from "react";
 
 const options = ["All Categories", "CAR", "Clothes", "Electronics"];
 
-function SearchBar() {
+const SearchBar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const open = Boolean(anchorEl);
