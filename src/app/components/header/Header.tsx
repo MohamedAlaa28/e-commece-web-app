@@ -8,7 +8,13 @@ import { ColorModeContext } from '../../../../public/mui/useMode';
 
 const options = ["AR", "EN"];
 
-const Header = () => {
+const socialIcons = [
+    { Icon: TwitterIcon, sx: { fontSize: "16px", color: "#fff" } },
+    { Icon: FacebookIcon, sx: { fontSize: "16px", mx: 1, color: "#fff" } },
+    { Icon: InstagramIcon, sx: { fontSize: "16px", color: "#fff" } },
+];
+
+function Header() {
     const colorMode = useContext(ColorModeContext);
     if (!colorMode) {
         throw new Error('ColorModeContext not found');
@@ -32,12 +38,6 @@ const Header = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    const socialIcons = [
-        { Icon: TwitterIcon, sx: { fontSize: "16px", color: "#fff" } },
-        { Icon: FacebookIcon, sx: { fontSize: "16px", mx: 1, color: "#fff" } },
-        { Icon: InstagramIcon, sx: { fontSize: "16px", color: "#fff" } },
-    ];
 
     return (
         <Box sx={{ bgcolor: "#2b3445", px: "4px", borderBottomRightRadius: "4px", borderBottomLeftRadius: "4px" }}>

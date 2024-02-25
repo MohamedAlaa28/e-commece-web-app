@@ -1,8 +1,10 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Rating, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Rating, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
+import { Close } from "@mui/icons-material";
 import "./buttonsStyle.css";
 import { useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-const Main = () => {
+import ProductDetails from "./ProductDetails";
+function Main() {
     const theme = useTheme();
 
     const handleAlignment = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
@@ -11,8 +13,18 @@ const Main = () => {
 
     const [alignment, setAlignment] = useState("left");
 
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
-        <Container sx={{py: 9 }}>
+        <Container sx={{ py: 9 }}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
                 <Box>
                     <Typography variant="h6">Selected Products</Typography>
@@ -84,7 +96,7 @@ const Main = () => {
                                     </Typography>
 
                                     <Typography variant="subtitle1" component="p">
-                                        12.99$
+                                        $12.99
                                     </Typography>
                                 </Stack>
 
@@ -96,12 +108,45 @@ const Main = () => {
                             </CardContent>
 
                             <CardActions sx={{ justifyContent: "space-between" }}>
-                                <Button size="large"><AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />Add To Cart</Button>
-                                <Button size="small"><Rating name="read-only" value={4.3} precision={0.1} readOnly /></Button>
+                                <Button size="large" onClick={handleClickOpen}>
+                                    <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                                    Add To Cart
+                                </Button>
+                                <Button size="small">
+                                    <Rating name="read-only" value={4.3} precision={0.1} readOnly />
+                                </Button>
                             </CardActions>
+
                         </Card>
                     ))
                 }
+                <Dialog
+                    sx={{ ".MuiPaper-root": { minWidth: { xs: "100%", md: 800 } } }}
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    {/* <DialogTitle id="alert-dialog-title"> */}
+                    <IconButton
+                        sx={{
+                            ":hover": { color: "red", rotate: "180deg", transition: "0.3s" },
+                            position: "absolute",
+                            top: 11,
+                            right: 11,
+                        }}
+                        onClick={handleClose}
+                    >
+                        <Close />
+                    </IconButton>
+                    {/* </DialogTitle> */}
+                    {/* <DialogContent> */}
+                    <ProductDetails />
+                    {/* </DialogContent> */}
+                    {/* <DialogActions>
+                                    <Button onClick={handleClose}>Disagree</Button>
+                                </DialogActions> */}
+                </Dialog>
             </Stack>
 
         </Container>

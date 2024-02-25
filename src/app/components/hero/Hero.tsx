@@ -39,7 +39,7 @@ const banners = [
     },
 ];
 
-const Hero = () => {
+function Hero() {
     const theme = useTheme();
 
     return (

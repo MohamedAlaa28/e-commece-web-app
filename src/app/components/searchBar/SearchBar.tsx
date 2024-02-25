@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const options = ["All Categories", "CAR", "Clothes", "Electronics"];
 
-const SearchBar = () => {
+function SearchBar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const open = Boolean(anchorEl);

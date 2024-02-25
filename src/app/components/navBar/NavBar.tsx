@@ -7,7 +7,34 @@ import { SportsEsportsOutlined, ElectricBikeOutlined, LaptopChromebookOutlined, 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HeaderLinks from "./NavBarLinks";
 
-const NavBar = () => {
+
+const navigation = [
+  { mainLink: "Home", subLinks: ["Link 1", "Link 2", "Link 3"] },
+  { mainLink: "Mega menu", subLinks: ["Link 1", "Link 2", "Link 3"] },
+  {
+    mainLink: "Full screen menu",
+    subLinks: ["Link 1", "Link 2", "Link 3"],
+  },
+  { mainLink: "Pages", subLinks: ["Link 1", "Link 2", "Link 3"] },
+  {
+    mainLink: "User account",
+    subLinks: ["Link 1", "Link 2", "Link 3"],
+  },
+  {
+    mainLink: "Vendor account",
+    subLinks: ["Link 1", "Link 2", "Link 3"],
+  },
+];
+
+const menuItems = [
+  { text: "Bikes", Icon: ElectricBikeOutlined },
+  { text: "Electronics", Icon: LaptopChromebookOutlined },
+  { text: "Books", Icon: MenuBookOutlined },
+  { text: "Games", Icon: SportsEsportsOutlined },
+];
+
+
+function NavBar() {
   const desktop = useMediaQuery('(min-width:1200px)');
   const mobile = useMediaQuery('(max-width:1200px)');
 
@@ -23,13 +50,6 @@ const NavBar = () => {
 
   const theme = useTheme();
 
-  const menuItems = [
-    { text: "Bikes", Icon: ElectricBikeOutlined },
-    { text: "Electronics", Icon: LaptopChromebookOutlined },
-    { text: "Books", Icon: MenuBookOutlined },
-    { text: "Games", Icon: SportsEsportsOutlined },
-  ];
-
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -41,23 +61,7 @@ const NavBar = () => {
     setState({ ...state, [anchor]: open });
   };
 
-  const navigation = [
-    { mainLink: "Home", subLinks: ["Link 1", "Link 2", "Link 3"] },
-    { mainLink: "Mega menu", subLinks: ["Link 1", "Link 2", "Link 3"] },
-    {
-      mainLink: "Full screen menu",
-      subLinks: ["Link 1", "Link 2", "Link 3"],
-    },
-    { mainLink: "Pages", subLinks: ["Link 1", "Link 2", "Link 3"] },
-    {
-      mainLink: "User account",
-      subLinks: ["Link 1", "Link 2", "Link 3"],
-    },
-    {
-      mainLink: "Vendor account",
-      subLinks: ["Link 1", "Link 2", "Link 3"],
-    },
-  ];
+
 
   return (
     <Container sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>

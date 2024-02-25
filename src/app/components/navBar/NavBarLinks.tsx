@@ -1,4 +1,4 @@
-import { ExpandMore, KeyboardArrowRightOutlined} from "@mui/icons-material"
+import { ExpandMore, KeyboardArrowRightOutlined } from "@mui/icons-material"
 import { Box, List, ListItem, ListItemButton, ListItemText, Paper, Typography } from "@mui/material"
 import { HomeItems, pagesItems, userAccountItems, vendorAccountItems } from "./NavBarDataLinks";
 
@@ -23,7 +23,7 @@ const Items = (item: string) => {
 type prop = {
     title: string;
 }
-const NavBarLinks = ({ title }: prop) => {
+function NavBarLinks({ title }: prop) {
 
     const items = Items(title);
 
