@@ -140,10 +140,10 @@ const NavBar = () => {
         onClose={toggleDrawer("top", false)}
         sx={{
           ".MuiPaper-root.css-1sozasi-MuiPaper-root-MuiDrawer-paper": {
-            height: "100%",
+            minHeight: "100%",
           },
           ".MuiPaper-root.css-1qdun2q-MuiPaper-root-MuiDrawer-paper": {
-            height: "100%",
+            minHeight: "100%",
           }
         }}
       >
