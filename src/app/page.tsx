@@ -2,11 +2,13 @@
 import styles from "./page.module.css";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from '../../public/mui/useMode';
-import Navbar from "./components/Header";
+import Navbar from "./components/header/Header";
 import SearchBar from "./components/searchBar/SearchBar";
 import Header from "./components/navBar/NavBar";
 import Hero from "./components/hero/Hero";
 import Main from "./components/main/Main";
+import Footer from "./components/footer/Footer";
+import ScrollToTop from "./components/scroll/ScrollToTop";
 
 function Home() {
   const [theme, colorMode] = useMode();
@@ -27,6 +29,9 @@ function Home() {
             <Main />
           </Box>
 
+          <Footer />
+
+          <ScrollToTop/>
         </main>
       </ThemeProvider>
     </ColorModeContext.Provider>

@@ -12,7 +12,7 @@ const Main = () => {
     const [alignment, setAlignment] = useState("left");
 
     return (
-        <Container sx={{ mt: 2.5 }}>
+        <Container sx={{py: 9 }}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
                 <Box>
                     <Typography variant="h6">Selected Products</Typography>
