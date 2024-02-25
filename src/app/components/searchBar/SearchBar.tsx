@@ -1,4 +1,4 @@
-import { Container, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useTheme } from "@mui/material"
+import { Container, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useMediaQuery, useTheme } from "@mui/material"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
@@ -28,12 +28,16 @@ const SearchBar = () => {
 
   const theme = useTheme();
 
+  const desktop = useMediaQuery("(min-width:600px)");
+
   return (
     <Container sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
-      <Stack alignItems={"center"}>
-        <ShoppingCartIcon />
-        <Typography variant="body2">E-commerce</Typography>
-      </Stack>
+      {desktop &&
+        <Stack alignItems={"center"}>
+          <ShoppingCartIcon />
+          <Typography variant="body2">E-commerce</Typography>
+        </Stack>
+      }
 
       <Search>
         <SearchIconWrapper>

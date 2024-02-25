@@ -6,6 +6,7 @@ import Navbar from "./components/Header";
 import SearchBar from "./components/searchBar/SearchBar";
 import Header from "./components/navBar/NavBar";
 import Hero from "./components/hero/Hero";
+import Main from "./components/main/Main";
 
 function Home() {
   const [theme, colorMode] = useMode();
@@ -23,6 +24,7 @@ function Home() {
             // @ts-ignore
             theme.palette.bg.main}>
             <Hero />
+            <Main />
           </Box>
 
         </main>

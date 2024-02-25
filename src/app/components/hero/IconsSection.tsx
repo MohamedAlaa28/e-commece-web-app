@@ -24,9 +24,9 @@ const IconsSection = () => {
         }}>
             <Stack
                 divider={
-                    desktop ? (
+                    desktop && (
                         <Divider orientation="vertical" flexItem />
-                    ) : null
+                    )
                 }
                 direction={"row"} alignItems={"center"} flexWrap={"wrap"}
             >

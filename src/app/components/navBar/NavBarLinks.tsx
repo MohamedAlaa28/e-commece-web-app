@@ -1,25 +1,32 @@
-import { ExpandMore, KeyboardArrowRightOutlined, Translate } from "@mui/icons-material"
+import { ExpandMore, KeyboardArrowRightOutlined} from "@mui/icons-material"
 import { Box, List, ListItem, ListItemButton, ListItemText, Paper, Typography } from "@mui/material"
+import { HomeItems, pagesItems, userAccountItems, vendorAccountItems } from "./NavBarDataLinks";
 
 
-const menuItems = [
-    { id: "dashboard", title: "Dashboard", subLinks: [] },
-    {
-        id: "products",
-        title: "Products",
-        subLinks: [
-            { id: "addProduct", title: "Add Product" },
-            { id: "editProduct", title: "Edit Product" },
-        ],
-    },
-    { id: "orders", title: "Orders", subLinks: [] },
-    { id: "profile", title: "Profile", subLinks: [] },
-];
+const Items = (item: string) => {
+    switch (item) {
+        case "Vendor Account":
+            return vendorAccountItems;
+        case "User Account":
+            return userAccountItems;
+
+        case "Pages":
+            return pagesItems;
+
+        case "Home":
+            return HomeItems;
+        default:
+            return vendorAccountItems;
+    }
+}
 
 type prop = {
     title: string;
 }
 const NavBarLinks = ({ title }: prop) => {
+
+    const items = Items(title);
+
     return (
         <Box sx={{ position: "relative", display: "flex", alignItems: "center", ":hover .hover-menu": { display: "block" } }}>
             <Typography variant="body1">
@@ -32,7 +39,7 @@ const NavBarLinks = ({ title }: prop) => {
                 <Paper sx={{ mt: 2 }}>
                     <nav aria-label="secondary mailbox folders">
                         <List>
-                            {menuItems.map((item) => (
+                            {items.map((item) => (
                                 <ListItem
                                     key={item.id}
                                     sx={{
@@ -54,7 +61,8 @@ const NavBarLinks = ({ title }: prop) => {
                                             className="sub-link"
                                             sx={{ display: "none", position: "absolute", top: 0, left: "100%" }}
                                         >
-                                            <Paper sx={{ ml: 1, minWidth: 150 }}>
+                                            <Paper sx={{ ml: 1, minWidth: item.title === "Shop" ? 166 : 150 }}>
+
                                                 <nav aria-label={`${item.title} sub menu`}>
                                                     <List>
                                                         {item.subLinks.map((subLink) => (
