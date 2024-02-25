@@ -139,12 +139,9 @@ const NavBar = () => {
         open={state["top"]}
         onClose={toggleDrawer("top", false)}
         sx={{
-          ".css-an8jbt": {
+           ".MuiPaper-root": {
             minHeight: "100%",
           },
-          ".css-an8jbt": {
-            minHeight: "100%",
-          }
         }}
       >
         <Box
