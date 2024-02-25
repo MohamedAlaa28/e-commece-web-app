@@ -108,7 +108,7 @@ function Main() {
                             </CardContent>
 
                             <CardActions sx={{ justifyContent: "space-between" }}>
-                                <Button size="large" onClick={handleClickOpen}>
+                                <Button size="large" onClick={handleClickOpen}  sx={{ textTransform: "capitalize" }}>
                                     <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                                     Add To Cart
                                 </Button>
@@ -127,7 +127,6 @@ function Main() {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    {/* <DialogTitle id="alert-dialog-title"> */}
                     <IconButton
                         sx={{
                             ":hover": { color: "red", rotate: "180deg", transition: "0.3s" },
@@ -139,13 +138,7 @@ function Main() {
                     >
                         <Close />
                     </IconButton>
-                    {/* </DialogTitle> */}
-                    {/* <DialogContent> */}
                     <ProductDetails />
-                    {/* </DialogContent> */}
-                    {/* <DialogActions>
-                                    <Button onClick={handleClose}>Disagree</Button>
-                                </DialogActions> */}
                 </Dialog>
             </Stack>
 

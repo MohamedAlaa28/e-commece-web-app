@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HeaderLinks from "./NavBarLinks";
 
 
-const navigation = [
+const mobileNavigation = [
   { mainLink: "Home", subLinks: ["Link 1", "Link 2", "Link 3"] },
   { mainLink: "Mega menu", subLinks: ["Link 1", "Link 2", "Link 3"] },
   {
@@ -146,13 +146,10 @@ function NavBar() {
           ".MuiPaper-root": {
             minHeight: "100%",
           },
-          // ".MuiPaper-root.css-1qdun2q-MuiPaper-root-MuiDrawer-paper": {
-          //   minHeight: "100%",
-          // }
         }}
       >
         <Box
-          sx={{ width: 444, mx: "auto", mt: 6, position: "relative", pt: 10 }}
+          sx={{ width: "100%", mx: "auto", mt: 6, position: "relative", pt: 10 }}
         >
           <IconButton
             sx={{
@@ -166,11 +163,11 @@ function NavBar() {
             <Close />
           </IconButton>
 
-          {navigation.map((item) => (
+          {mobileNavigation.map((item) => (
             <Accordion
               key={item.mainLink}
               elevation={0}
-              sx={{ bgcolor: "initial" }}
+              sx={{ bgcolor: "initial"}}
             >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
