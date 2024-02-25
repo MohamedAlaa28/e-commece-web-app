@@ -32,7 +32,7 @@ function Footer() {
                 >
                     Mohamed Alaa
                 </Button>
-                ©2023
+                ©2024
             </Typography>
         </Box>
     )

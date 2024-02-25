@@ -1,8 +1,9 @@
 import { Container, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useMediaQuery, useTheme } from "@mui/material"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+// import StoreIcon from '@material-ui/icons/Store';
 import SearchIcon from "@mui/icons-material/Search";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import { ExpandMore } from "@mui/icons-material";
+import { ExpandMore, Language, StoreMallDirectory, StoreMallDirectoryOutlined, Storefront } from "@mui/icons-material";
 import { StyledBadge, StyledInputBase, SearchIconWrapper, Search } from "./muiSearchBarStyle";
 import { useState } from "react";
 
@@ -33,9 +34,9 @@ function SearchBar() {
   return (
     <Container sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
       {desktop &&
-        <Stack alignItems={"center"}>
-          <ShoppingCartIcon />
-          <Typography variant="body2">E-commerce</Typography>
+        <Stack alignItems={"center"} direction={"row"} gap={1}>
+          <Language />
+          <Typography variant="body1">Mercado</Typography>
         </Stack>
       }
 
