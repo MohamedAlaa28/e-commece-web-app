@@ -79,7 +79,10 @@ function Main() {
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"}>
                 {
                     [1, 2, 3, 4].map((card) => (
-                        <Card key={card} sx={{ maxWidth: 333, mt: 6, ":hover .MuiCardMedia-root": { scale: "1.05", rotate: "1deg", transition: "0.35s" } }}>
+                        <Card key={card} sx={{
+                            maxWidth: 333, mt: 6, ":hover .MuiCardMedia-root": { scale: "1.05", rotate: "1deg", transition: "0.35s" },
+                            bgcolor: theme.palette.mode === "dark" ? "#000" : "#fff"
+                        }}>
                             <CardMedia
                                 sx={{ height: 277 }}
                                 image="/images/products/100.jpg"
@@ -108,7 +111,7 @@ function Main() {
                             </CardContent>
 
                             <CardActions sx={{ justifyContent: "space-between" }}>
-                                <Button size="large" onClick={handleClickOpen}  sx={{ textTransform: "capitalize" }}>
+                                <Button size="large" onClick={handleClickOpen} sx={{ textTransform: "capitalize" }}>
                                     <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                                     Add To Cart
                                 </Button>

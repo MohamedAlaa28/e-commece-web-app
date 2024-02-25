@@ -7,7 +7,7 @@ function ProductDetails() {
     return (
         <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
             <Box sx={{ display: "flex" }}>
-                <Image src="/images/products/1 (15).jpg" alt="product" width={300} height={400} style={{ borderRadius: 3 }} />
+                <Image src="/images/products/4.jpg" alt="product" width={300} height={400} style={{ borderRadius: 3 }} />
             </Box>
 
             <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, p: 2 }}>
@@ -26,7 +26,7 @@ function ProductDetails() {
                     {
                         [1, 2, 3].map((image) => (
                             <Box key={image}>
-                                <Image src="/images/products/1 (15).jpg" alt="product" width={90} height={100} style={{ borderRadius: 3 }} />
+                                <Image src="/images/products/4.jpg" alt="product" width={90} height={100} style={{ borderRadius: 3 }} />
                             </Box>
                         ))
                     }
