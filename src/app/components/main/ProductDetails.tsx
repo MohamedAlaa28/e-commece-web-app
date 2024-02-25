@@ -7,17 +7,17 @@ function ProductDetails() {
     return (
         <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
             <Box sx={{ display: "flex" }}>
-                <img src="/images/products/1 (15).jpg" alt="product" width={360} />
+                <Image src="/images/products/1 (15).jpg" alt="product" width={300} height={333.33} style={{ borderRadius: 3 }} />
             </Box>
 
-            <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, px: 2 }}>
+            <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, p: 2 }}>
                 <Typography variant="h5">
                     WOMEN FASHION
                 </Typography>
                 <Typography variant="h6" my={0.4} fontSize={"22px"} color={"crimson"} >
                     $12.99
                 </Typography>
-                <Typography variant="body2">
+                <Typography variant="body1">
                     Lizards are a widespread group of squamate reptiles, with over 6,000
                     species, ranging across all continents except Antarctica
                 </Typography>
@@ -26,7 +26,7 @@ function ProductDetails() {
                     {
                         [1, 2, 3].map((image) => (
                             <Box key={image}>
-                                <img height={100} width={90} src="/images/products/1 (15).jpg" alt="product" style={{ borderRadius: 3 }} />
+                                <Image src="/images/products/1 (15).jpg" alt="product" width={90} height={100} style={{ borderRadius: 3 }} />
                             </Box>
                         ))
                     }
