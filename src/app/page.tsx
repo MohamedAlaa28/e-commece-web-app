@@ -31,7 +31,7 @@ function Home() {
 
           <Footer />
 
-          <ScrollToTop/>
+          <ScrollToTop />
         </main>
       </ThemeProvider>
     </ColorModeContext.Provider>

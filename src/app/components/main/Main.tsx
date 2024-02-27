@@ -1,17 +1,43 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Rating, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
+"use client"
+import { Box, Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Dialog, IconButton, Rating, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
 import { Close } from "@mui/icons-material";
 import "./buttonsStyle.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import ProductDetails from "./ProductDetails";
+import { useGetProductByNameQuery } from "../../../state/productsData";
+import CircularProgressWithLabel from "./Loading";
+
+interface ProductAttribute {
+    productTitle: string;
+    productPrice: number;
+    productDescription: string;
+    productRating: number;
+    productImage: {
+        data: Array<{
+            attributes: {
+                url: string;
+            };
+        }>;
+    };
+}
+
+interface Product {
+    id: string;
+    attributes: ProductAttribute;
+}
+
+interface ApiResponse {
+    data: Product[];
+}
+
+
 function Main() {
     const theme = useTheme();
 
-    const handleAlignment = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
-        setAlignment(newAlignment);
+    const handleAlignment = (event: React.MouseEvent<HTMLElement>, newProductsValue: string) => {
+        setProductData(newProductsValue);
     };
-
-    const [alignment, setAlignment] = useState("left");
 
     const [open, setOpen] = useState(false);
 
@@ -23,131 +49,172 @@ function Main() {
         setOpen(false);
     };
 
-    return (
-        <Container sx={{ py: 9 }}>
-            <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
-                <Box>
-                    <Typography variant="h6">Selected Products</Typography>
-                    <Typography fontWeight={300} variant="body1">
-                        All our new arrivals in a exclusive brand selection
-                    </Typography>
-                </Box>
 
-                <ToggleButtonGroup
-                    color="error"
-                    value={alignment}
-                    exclusive
-                    aria-label="text alignment"
-                    onChange={handleAlignment}
-                    sx={{
-                        ".Mui-selected": {
-                            border: "1px solid rgba(233, 69, 96, 0.5) !important",
-                            color: "#e94560",
-                            backgroundColor: "initial",
-                        },
-                    }}
-                >
-                    <ToggleButton
-                        sx={{ color: theme.palette.text.primary }}
-                        className="toggle-Button"
-                        value="left"
-                        aria-label="left aligned"
-                    >
-                        All Products
-                    </ToggleButton>
+    const [progress, setProgress] = useState(50);
 
-                    <ToggleButton
-                        sx={{ mx: "16px !important", color: theme.palette.text.primary }}
-                        className="toggle-Button"
-                        value="center"
-                        aria-label="centered"
-                    >
-                        MEN category
-                    </ToggleButton>
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+        }, 800);
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
 
-                    <ToggleButton
-                        sx={{ color: theme.palette.text.primary }}
-                        className="toggle-Button"
-                        value="right"
-                        aria-label="right aligned"
-                    >
-                        Women category
-                    </ToggleButton>
-                </ToggleButtonGroup>
-            </Stack>
 
-            <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"}>
-                {
-                    [1, 2, 3, 4].map((card) => (
-                        <Card key={card} sx={{
-                            maxWidth: 333, mt: 6, ":hover .MuiCardMedia-root": { scale: "1.1", rotate: "1deg", transition: "0.35s" },
-                            bgcolor: theme.palette.mode === "dark" ? "#000" : "#fff",
-                            boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset",
-                        }}>
-                            <CardMedia
-                                sx={{ height: 277 }}
-                                image="/images/100.jpg"
-                                title="green iguana"
-                            />
-                            <CardContent>
-                                <Stack
-                                    direction={"row"}
-                                    justifyContent={"space-between"}
-                                    alignItems={"center"}
-                                >
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        T-shirt
-                                    </Typography>
+    const allProductsAPI = "products?populate=*";
+    const menProductsAPI = "products?populate=*&filters[productCategory][$eq]=men";
+    const womenProductsAPI = "products?populate=*&filters[productCategory][$eq]=women";
 
-                                    <Typography variant="subtitle1" component="p">
-                                        $12.99
-                                    </Typography>
-                                </Stack>
+    const [productData, setProductData] = useState(allProductsAPI);
 
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
+    const { data: responseData, error, isLoading } = useGetProductByNameQuery(productData);
+    const data = responseData as ApiResponse;
 
-                            </CardContent>
+    if (isLoading) {
+        return <CircularProgressWithLabel value={progress} />;
+    }
+    if (data) {
+        return (
+            <Container sx={{ py: 9 }}>
+                <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
+                    <Box>
+                        <Typography variant="h6">Selected Products</Typography>
+                        <Typography fontWeight={300} variant="body1">
+                            All our new arrivals in a exclusive brand selection
+                        </Typography>
+                    </Box>
 
-                            <CardActions sx={{ justifyContent: "space-between" }}>
-                                <Button size="large" onClick={handleClickOpen} sx={{ textTransform: "capitalize" }}>
-                                    <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                                    Add To Cart
-                                </Button>
-                                <Button size="small">
-                                    <Rating name="read-only" value={4.3} precision={0.1} readOnly />
-                                </Button>
-                            </CardActions>
-
-                        </Card>
-                    ))
-                }
-                <Dialog
-                    sx={{ ".MuiPaper-root": { minWidth: { xs: "100%", md: 800 } } }}
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <IconButton
+                    <ToggleButtonGroup
+                        color="error"
+                        value={productData}
+                        exclusive
+                        aria-label="text alignment"
+                        onChange={handleAlignment}
                         sx={{
-                            ":hover": { color: "red", rotate: "180deg", transition: "0.3s" },
-                            position: "absolute",
-                            top: 11,
-                            right: 11,
+                            ".Mui-selected": {
+                                border: "1px solid rgba(233, 69, 96, 0.5) !important",
+                                color: "#e94560",
+                                backgroundColor: "initial",
+                            },
                         }}
-                        onClick={handleClose}
                     >
-                        <Close />
-                    </IconButton>
-                    <ProductDetails />
-                </Dialog>
-            </Stack>
+                        <ToggleButton
+                            sx={{ color: theme.palette.text.primary }}
+                            className="toggle-Button"
+                            value={allProductsAPI}
+                            aria-label="left aligned"
 
-        </Container>
-    )
+                        >
+                            All Products
+                        </ToggleButton>
+
+                        <ToggleButton
+                            sx={{ mx: "16px !important", color: theme.palette.text.primary }}
+                            className="toggle-Button"
+                            value={menProductsAPI}
+                            aria-label="centered"
+
+                        >
+                            MEN category
+                        </ToggleButton>
+
+                        <ToggleButton
+                            sx={{ color: theme.palette.text.primary }}
+                            className="toggle-Button"
+                            value={womenProductsAPI}
+                            aria-label="right aligned"
+
+                        >
+                            Women category
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                </Stack>
+
+                <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"}>
+                    {
+                        data.data.map((product: Product) => (
+                            <Card key={product.id} sx={{
+                                maxWidth: 333, mt: 6, ":hover .MuiCardMedia-root": { scale: "1.05", rotate: "1deg", transition: "0.35s" },
+                                bgcolor: theme.palette.mode === "dark" ? "#000" : "#fff",
+                                boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset",
+                            }}>
+                                <CardMedia
+                                    sx={{ height: 277 }}
+                                    image={`${product.attributes.productImage.data[0].attributes.url}`}
+                                    title="green iguana"
+                                />
+                                <CardContent>
+                                    <Stack
+                                        direction={"row"}
+                                        justifyContent={"space-between"}
+                                        alignItems={"center"}
+                                    >
+                                        <Typography gutterBottom variant="h6" component="div"
+                                            sx={{
+                                                display: '-webkit-box',
+                                                overflow: 'hidden',
+                                                WebkitBoxOrient: 'vertical',
+                                                WebkitLineClamp: 1,
+                                            }}>
+                                            {product.attributes.productTitle}
+                                        </Typography>
+
+                                        <Typography variant="subtitle1" component="p">
+                                            ${product.attributes.productPrice}
+                                        </Typography>
+                                    </Stack>
+
+                                    <Typography variant="body2" color="text.secondary"
+                                        sx={{
+                                            display: '-webkit-box',
+                                            overflow: 'hidden',
+                                            WebkitBoxOrient: 'vertical',
+                                            WebkitLineClamp: 3,
+                                        }}>
+                                        {product.attributes.productDescription}
+                                    </Typography>
+
+                                </CardContent>
+
+                                <CardActions sx={{ justifyContent: "space-between" }}>
+                                    <Button size="large" onClick={handleClickOpen} sx={{ textTransform: "capitalize" }}>
+                                        <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                                        Add To Cart
+                                    </Button>
+                                    <Button size="small">
+                                        <Rating name="read-only" value={product.attributes.productRating} precision={0.1} readOnly />
+                                    </Button>
+                                </CardActions>
+
+                            </Card>
+                        ))
+                    }
+                    <Dialog
+                        sx={{ ".MuiPaper-root": { minWidth: { xs: "100%", md: 800 } } }}
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <IconButton
+                            sx={{
+                                ":hover": { color: "red", rotate: "180deg", transition: "0.3s" },
+                                position: "absolute",
+                                top: 11,
+                                right: 11,
+                            }}
+                            onClick={handleClose}
+                        >
+                            <Close />
+                        </IconButton>
+                        <ProductDetails />
+                    </Dialog>
+                </Stack>
+
+            </Container>
+        )
+    }
 }
 
 export default Main
