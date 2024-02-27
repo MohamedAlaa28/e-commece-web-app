@@ -15,7 +15,7 @@ function ProductDetails() {
             <Box sx={{ display: "flex" }}>
                 <Image src="/images/100.jpg" alt="product" width={300} height={400} style={{
                     borderRadius: 3,
-                    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
+                    boxShadow: "0px 1px 1px 0px rgba(0,0,0,0.1), 0px 1px 1px 0px rgba(0,0,0,0.1), 0px 1px 1px 0px rgba(0,0,0,0.1)"
                 }} />
             </Box>
 
@@ -37,7 +37,7 @@ function ProductDetails() {
                             <Box key={image.link}>
                                 <Image src={image.link} alt="product" width={90} height={100} style={{
                                     borderRadius: 3,
-                                    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
+                                    boxShadow: "0px 1px 1px 0px rgba(0,0,0,0.1), 0px 1px 1px 0px rgba(0,0,0,0.1), 0px 1px 1px 0px rgba(0,0,0,0.1)"
                                 }}
                                 />
                             </Box>
