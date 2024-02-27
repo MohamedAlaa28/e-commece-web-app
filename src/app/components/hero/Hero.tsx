@@ -23,7 +23,7 @@ const banners = [
             { variant: "h6", text: "SUMMER", lineHeight: "16px", mt: 1 },
             { variant: "h6", text: "SALE 20% OFF" },
         ],
-        linkText: "shop now",
+        linkText: "Shop now",
         linkHref: "#",
     },
     {
@@ -34,7 +34,7 @@ const banners = [
             { variant: "h6", text: "DESKTOPS &", lineHeight: "16px", mt: 1 },
             { variant: "h6", text: "LAPTOPS" },
         ],
-        linkText: "shop now",
+        linkText: "Shop now",
         linkHref: "#",
     },
 ];

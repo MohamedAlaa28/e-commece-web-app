@@ -2,12 +2,21 @@ import { AddShoppingCartOutlined } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material"
 import Image from "next/image";
 
+const subProduct = [
+    { link: "/images/1.jpg" },
+    { link: "/images/2.jpg" },
+    { link: "/images/100.jpg" },
+];
+
 
 function ProductDetails() {
     return (
         <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
             <Box sx={{ display: "flex" }}>
-                <Image src="/images/products/4.jpg" alt="product" width={300} height={400} style={{ borderRadius: 3 }} />
+                <Image src="/images/100.jpg" alt="product" width={300} height={400} style={{
+                    borderRadius: 3,
+                    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
+                }} />
             </Box>
 
             <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, p: 2 }}>
@@ -24,9 +33,13 @@ function ProductDetails() {
 
                 <Stack direction={"row"} gap={1} my={2} sx={{ justifyContent: { xs: 'center', sm: 'left' } }}>
                     {
-                        [1, 2, 3].map((image) => (
-                            <Box key={image}>
-                                <Image src="/images/products/4.jpg" alt="product" width={90} height={100} style={{ borderRadius: 3 }} />
+                        subProduct.map((image) => (
+                            <Box key={image.link}>
+                                <Image src={image.link} alt="product" width={90} height={100} style={{
+                                    borderRadius: 3,
+                                    boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)"
+                                }}
+                                />
                             </Box>
                         ))
                     }
