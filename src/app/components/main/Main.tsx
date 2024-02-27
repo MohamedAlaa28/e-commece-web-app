@@ -82,7 +82,7 @@ function Main() {
                         <Card key={card} sx={{
                             maxWidth: 333, mt: 6, ":hover .MuiCardMedia-root": { scale: "1.1", rotate: "1deg", transition: "0.35s" },
                             bgcolor: theme.palette.mode === "dark" ? "#000" : "#fff",
-                            boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;",
+                            boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset",
                         }}>
                             <CardMedia
                                 sx={{ height: 277 }}

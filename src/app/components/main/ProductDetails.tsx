@@ -1,5 +1,5 @@
 import { AddShoppingCartOutlined } from "@mui/icons-material";
-import { Box, Button, Stack, Typography } from "@mui/material"
+import { Box, Button, Stack, Typography, useTheme } from "@mui/material"
 import Image from "next/image";
 
 const subProduct = [
@@ -10,12 +10,16 @@ const subProduct = [
 
 
 function ProductDetails() {
+    const theme = useTheme();
+
     return (
-        <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
+        <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }} bgcolor={
+            // @ts-ignore
+            theme.palette.bg.main}>
             <Box sx={{ display: "flex" }}>
                 <Image src="/images/100.jpg" alt="product" width={300} height={400} style={{
                     borderRadius: 3,
-                    boxShadow: "0px 1px 1px 0px rgba(0,0,0,0.1), 0px 1px 1px 0px rgba(0,0,0,0.1), 0px 1px 1px 0px rgba(0,0,0,0.1)"
+                    boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset",
                 }} />
             </Box>
 
@@ -37,7 +41,7 @@ function ProductDetails() {
                             <Box key={image.link}>
                                 <Image src={image.link} alt="product" width={90} height={100} style={{
                                     borderRadius: 3,
-                                    boxShadow: "0px 1px 1px 0px rgba(0,0,0,0.1), 0px 1px 1px 0px rgba(0,0,0,0.1), 0px 1px 1px 0px rgba(0,0,0,0.1)"
+                                    boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset",
                                 }}
                                 />
                             </Box>
