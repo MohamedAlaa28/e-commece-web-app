@@ -1,5 +1,5 @@
 "use client"
-import { Box, Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Dialog, IconButton, Rating, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Dialog, IconButton, Rating, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
 import { Close } from "@mui/icons-material";
 import "./buttonsStyle.css";
 import { useEffect, useState } from "react";
@@ -7,36 +7,15 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import ProductDetails from "./ProductDetails";
 import { useGetProductByNameQuery } from "../../../state/productsData";
 import CircularProgressWithLabel from "./Loading";
-
-interface ProductAttribute {
-    productTitle: string;
-    productPrice: number;
-    productDescription: string;
-    productRating: number;
-    productImage: {
-        data: Array<{
-            attributes: {
-                url: string;
-            };
-        }>;
-    };
-}
-
-interface Product {
-    id: string;
-    attributes: ProductAttribute;
-}
-
-interface ApiResponse {
-    data: Product[];
-}
-
+import { ApiResponse, Product } from "./types";
 
 function Main() {
     const theme = useTheme();
 
     const handleAlignment = (event: React.MouseEvent<HTMLElement>, newProductsValue: string) => {
-        setProductData(newProductsValue);
+        if (newProductsValue !== null) {
+            setProductData(newProductsValue);
+        }
     };
 
     const [open, setOpen] = useState(false);
@@ -50,7 +29,7 @@ function Main() {
     };
 
 
-    const [progress, setProgress] = useState(50);
+    const [progress, setProgress] = useState(10);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -66,14 +45,13 @@ function Main() {
     const menProductsAPI = "products?populate=*&filters[productCategory][$eq]=men";
     const womenProductsAPI = "products?populate=*&filters[productCategory][$eq]=women";
 
-    const [productData, setProductData] = useState(allProductsAPI);
+    const [productData, setProductData] = useState(menProductsAPI);
 
     const { data: responseData, error, isLoading } = useGetProductByNameQuery(productData);
     const data = responseData as ApiResponse;
 
-    if (isLoading) {
-        return <CircularProgressWithLabel value={progress} />;
-    }
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
     if (data) {
         return (
             <Container sx={{ py: 9 }}>
@@ -178,7 +156,10 @@ function Main() {
                                 </CardContent>
 
                                 <CardActions sx={{ justifyContent: "space-between" }}>
-                                    <Button size="large" onClick={handleClickOpen} sx={{ textTransform: "capitalize" }}>
+                                    <Button size="large" onClick={() => {
+                                        setSelectedProduct(product)
+                                        handleClickOpen();
+                                    }} sx={{ textTransform: "capitalize" }}>
                                         <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
                                         Add To Cart
                                     </Button>
@@ -208,12 +189,34 @@ function Main() {
                         >
                             <Close />
                         </IconButton>
-                        <ProductDetails />
+                        {selectedProduct && <ProductDetails selectedProduct={selectedProduct} />}
                     </Dialog>
                 </Stack>
 
             </Container>
         )
+    }
+    if (isLoading) {
+        return <CircularProgressWithLabel value={progress} />;
+    }
+    if (error) {
+        let errorMessage = 'An error occurred';
+
+        if ('error' in error) {
+        } else if ('status' in error && typeof error.status === 'number') {
+            errorMessage = `Server responded with status code: ${error.status}`;
+            if (typeof error.data === 'string') {
+                errorMessage += ` - ${error.data}`;
+            }
+        }
+
+        return (
+            <Container sx={{ py: 11, textAlign: "center" }}>
+                <Typography variant="h6" component="p">{errorMessage}</Typography>
+                <Typography variant="h6" component="p">please try again later</Typography>
+            </Container>
+        )
+
     }
 }
 
