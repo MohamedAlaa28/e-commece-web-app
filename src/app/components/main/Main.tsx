@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 
 function Main() {
     const theme = useTheme();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const handleAlignment = (event: React.MouseEvent<HTMLElement>, newProductsValue: string) => {
         if (newProductsValue !== null) {
@@ -58,8 +58,8 @@ function Main() {
     if (data) {
         return (
             <Container sx={{ py: 9 }}>
-                <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
-                    <Box>
+                <Stack direction={i18n.language == "ar" ? "row-reverse" : "row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
+                    <Box sx={{ textAlign: i18n.language == "ar" ? " right" : "left" }}>
                         <Typography variant="h6">{t("Selected Products")}</Typography>
                         <Typography fontWeight={300} variant="body1">
                             {t("All our new arrivals in a exclusive brand selection")}

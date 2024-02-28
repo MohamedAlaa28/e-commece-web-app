@@ -4,11 +4,11 @@ import CreditScoreOutlinedIcon from "@mui/icons-material/CreditScoreOutlined";
 import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import AccessAlarmOutlinedIcon from "@mui/icons-material/AccessAlarmOutlined";
 import { useTheme } from "@emotion/react";
-import { t } from "i18next";
-
+import { useTranslation } from "react-i18next";
 
 const IconsSection = () => {
     const theme = useTheme();
+    const { t, i18n } = useTranslation();
 
     const desktop = useMediaQuery("(min-width:600px)");
 
@@ -39,10 +39,12 @@ const IconsSection = () => {
                         width: 250,
                         py: 1.6,
                         display: "flex",
+                        flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
                         flexGrow: 1,
                         gap: 3,
                         alignItems: "center",
-                        justifyContent: desktop ? "center" : "left",
+                        textAlign: i18n.language == "ar" ? " right" : "left",
+                        justifyContent: desktop ? "center" : i18n.language == "ar" ? "right" : "left",
                     }}>
                         {item.icon}
                         <Box>

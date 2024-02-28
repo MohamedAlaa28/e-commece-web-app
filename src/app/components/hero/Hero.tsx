@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 import "./sliderStyle.css";
 import IconsSection from './IconsSection';
 import { useTranslation } from "react-i18next";
-import { t } from 'i18next';
 
 
 
@@ -97,12 +96,13 @@ function Hero() {
 
                                         <Stack
                                             sx={{
-                                                justifyContent: { xs: "center", sm: "left" },
+                                                justifyContent: { xs: "center", sm: i18n.language == "ar" ? " right" : "left" },
                                             }}
-                                            direction={"row"}
+                                            direction={i18n.language == "ar" ? "row-reverse" : "row"}
+                                            gap={1}
                                             alignItems={"center"}
                                         >
-                                            <Typography color={"#333"} mr={1} variant="h5">
+                                            <Typography color={"#333"} variant="h5">
                                                 {t("SALE UP TO")}
                                             </Typography>
                                             <Typography color={"#D23F57"} variant="h5">
@@ -184,6 +184,7 @@ function Hero() {
                                     sx={{
                                         color: "#2B3445",
                                         display: "flex",
+                                        flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
                                         alignItems: "center",
                                         gap: "5px",
                                         transition: "0.2s",
@@ -195,7 +196,7 @@ function Hero() {
                                     underline="none"
                                 >
                                     {t("Shop now")}
-                                    <ArrowForwardIcon sx={{ fontSize: "13px" }} />
+                                    <ArrowForwardIcon sx={{ fontSize: "13px", rotate: i18n.language == "ar" ? "180deg" : "0deg" }} />
                                 </Link>
                             </Stack>
                         </Box>

@@ -1,7 +1,8 @@
-import { Box, Button, Typography } from "@mui/material"
-
+import { Box, Button, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+    const { t, i18n } = useTranslation();
     return (
         <Box
             sx={{
@@ -14,12 +15,13 @@ function Footer() {
             <Typography
                 justifyContent={"center"}
                 display={"flex"}
+                flexDirection={i18n.language == "ar" ? "row-reverse" : "row"}
                 alignItems={"center"}
                 color={"HighlightText"}
                 variant="h6"
                 sx={{ fontSize: 18 }}
             >
-                Developed by
+                {t("Developed by")}
                 <Button
                     sx={{
                         mx: 0.5,
@@ -30,9 +32,9 @@ function Footer() {
                     variant="text"
                     color="primary"
                 >
-                    Mohamed Alaa
+                    {t("Mohamed Alaa")}
                 </Button>
-                ©2024
+                ©{t("2024")}
             </Typography>
         </Box>
     )

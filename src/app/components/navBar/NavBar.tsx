@@ -26,16 +26,10 @@ const mobileNavigation = [
   },
 ];
 
-const menuItems = [
-  { text: "Bikes", Icon: ElectricBikeOutlined },
-  { text: "Electronics", Icon: LaptopChromebookOutlined },
-  { text: "Books", Icon: MenuBookOutlined },
-  { text: "Games", Icon: SportsEsportsOutlined },
-];
 
 function NavBar() {
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const desktop = useMediaQuery('(min-width:1200px)');
   const mobile = useMediaQuery('(max-width:1200px)');
@@ -61,8 +55,19 @@ function NavBar() {
     setState({ ...state, [anchor]: open });
   };
 
+  const menuItems = [
+    { text: t("Bikes"), Icon: ElectricBikeOutlined },
+    { text: t("Electronics"), Icon: LaptopChromebookOutlined },
+    { text: t("Books"), Icon: MenuBookOutlined },
+    { text: t("Games"), Icon: SportsEsportsOutlined },
+  ];
+
+
   return (
-    <Container sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+    <Container sx={{
+      display: "flex", flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
+      alignItems: "center", justifyContent: "space-between"
+    }}>
       <Box>
         <Button
           id="basic-button"
@@ -75,6 +80,8 @@ function NavBar() {
             // @ts-ignore
             bgcolor: theme.palette.header.main,
             color: theme.palette.text.secondary,
+            flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
+            textAlign: i18n.language == "ar" ? " right" : "left"
           }}
         >
           <WindowIcon />
@@ -85,11 +92,11 @@ function NavBar() {
               mx: 1,
             }}
           >
-            Categories
+            {t("Categories")}
           </Typography>
           <Box flexGrow={1} />
 
-          <KeyboardArrowRightOutlinedIcon />
+          <KeyboardArrowRightOutlinedIcon sx={{ rotate: i18n.language == "ar" ? "180deg" : "0deg" }} />
         </Button>
 
         <Menu
@@ -109,7 +116,12 @@ function NavBar() {
           }}
         >
           {menuItems.map(({ text, Icon }, index) => (
-            <MenuItem key={index} onClick={handleClose}>
+            <MenuItem key={index} onClick={handleClose}
+              sx={{
+                gap: i18n.language == "ar" ? 2 : 0,
+                flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
+                textAlign: i18n.language == "ar" ? " right" : "left"
+              }}>
               <ListItemIcon>
                 <Icon fontSize="small" />
               </ListItemIcon>
@@ -120,7 +132,7 @@ function NavBar() {
       </Box>
 
       {desktop &&
-        <Stack direction={"row"} gap={4} alignItems={"center"}>
+        <Stack direction={i18n.language == "ar" ? "row-reverse" : "row"} gap={4} alignItems={"center"}>
           <HeaderLinks title={t('Home')} />
           <HeaderLinks title={t("Mega Menu")} />
           <HeaderLinks title={t("Full Screen Menu")} />

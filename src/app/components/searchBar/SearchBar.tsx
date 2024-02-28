@@ -5,10 +5,14 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import { ExpandMore, StoreSharp } from "@mui/icons-material";
 import { StyledBadge, StyledInputBase, SearchIconWrapper, Search } from "./muiSearchBarStyle";
 import { useState } from "react";
-
-const options = ["All Categories", "CAR", "Clothes", "Electronics"];
+import { useTranslation } from "react-i18next";
 
 function SearchBar() {
+  const theme = useTheme();
+  const { t, i18n } = useTranslation();
+
+  const desktop = useMediaQuery("(min-width:600px)");
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const open = Boolean(anchorEl);
@@ -26,9 +30,7 @@ function SearchBar() {
     setAnchorEl(null);
   };
 
-  const theme = useTheme();
-
-  const desktop = useMediaQuery("(min-width:600px)");
+  const options = [t("All Categories"), t("CAR"), t("Clothes"), t("Electronics")];
 
   return (
     <Container sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
@@ -92,7 +94,11 @@ function SearchBar() {
           >
             {options.map((option, index) => (
               <MenuItem
-                sx={{ fontSize: "13px" }}
+                sx={{
+                  fontSize: "13px",
+                  flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
+                  textAlign: i18n.language == "ar" ? " right" : "left"
+                }}
                 key={option}
                 selected={index === selectedIndex}
                 onClick={(event) => handleMenuItemClick(event, index)}
