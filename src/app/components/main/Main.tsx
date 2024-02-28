@@ -9,9 +9,11 @@ import { useGetProductByNameQuery } from "../../../state/productsData";
 import CircularProgressWithLabel from "./Loading";
 import { ApiResponse, Product } from "./types";
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from "react-i18next";
 
 function Main() {
     const theme = useTheme();
+    const { t } = useTranslation();
 
     const handleAlignment = (event: React.MouseEvent<HTMLElement>, newProductsValue: string) => {
         if (newProductsValue !== null) {
@@ -58,9 +60,9 @@ function Main() {
             <Container sx={{ py: 9 }}>
                 <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
                     <Box>
-                        <Typography variant="h6">Selected Products</Typography>
+                        <Typography variant="h6">{t("Selected Products")}</Typography>
                         <Typography fontWeight={300} variant="body1">
-                            All our new arrivals in a exclusive brand selection
+                            {t("All our new arrivals in a exclusive brand selection")}
                         </Typography>
                     </Box>
 
@@ -85,7 +87,7 @@ function Main() {
                             aria-label="left aligned"
 
                         >
-                            All Products
+                            {t("All Products")}
                         </ToggleButton>
 
                         <ToggleButton
@@ -95,7 +97,7 @@ function Main() {
                             aria-label="centered"
 
                         >
-                            MEN category
+                            {t("MEN category")}
                         </ToggleButton>
 
                         <ToggleButton
@@ -105,7 +107,7 @@ function Main() {
                             aria-label="right aligned"
 
                         >
-                            Women category
+                            {t("Women category")}
                         </ToggleButton>
                     </ToggleButtonGroup>
                 </Stack>

@@ -7,43 +7,45 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./sliderStyle.css";
 import IconsSection from './IconsSection';
+import { useTranslation } from "react-i18next";
+import { t } from 'i18next';
 
 
-const sliderPages = [
-    { text: "MEN", link: "/images/banner-15.jpg" },
-    { text: "WOMEN", link: "/images/banner-25.jpg" },
-];
-
-const banners = [
-    {
-        src: "/images/banner-17.jpg",
-        alt: "banner-17",
-        captions: [
-            { variant: "caption", text: "NEW ARRIVALS", fontSize: "18px" },
-            { variant: "h6", text: "SUMMER", lineHeight: "16px", mt: 1 },
-            { variant: "h6", text: "SALE 20% OFF" },
-        ],
-        linkText: "Shop now",
-        linkHref: "#",
-    },
-    {
-        src: "/images/banner-16.jpg",
-        alt: "banner-16",
-        captions: [
-            { variant: "caption", text: "GAMING 4K", fontSize: "18px" },
-            { variant: "h6", text: "DESKTOPS &", lineHeight: "16px", mt: 1 },
-            { variant: "h6", text: "LAPTOPS" },
-        ],
-        linkText: "Shop now",
-        linkHref: "#",
-    },
-];
 
 function Hero() {
     const theme = useTheme();
+    const { t, i18n } = useTranslation();
+
+    const sliderPages = [
+        { text: t("MEN"), link: "/images/banner-15.jpg" },
+        { text: t("WOMEN"), link: "/images/banner-25.jpg" },
+    ];
+
+    const banners = [
+        {
+            src: "/images/banner-17.jpg",
+            alt: "banner-17",
+            captions: [
+                { variant: "caption", text: t("NEW ARRIVALS"), fontSize: "18px" },
+                { variant: "h6", text: t("SUMMER"), lineHeight: "16px", mt: 1 },
+                { variant: "h6", text: t("SALE 20% OFF") },
+            ],
+            linkHref: "#",
+        },
+        {
+            src: "/images/banner-16.jpg",
+            alt: "banner-16",
+            captions: [
+                { variant: "caption", text: t("GAMING 4K"), fontSize: "18px" },
+                { variant: "h6", text: t("DESKTOPS &"), lineHeight: "16px", mt: 1 },
+                { variant: "h6", text: t("LAPTOPS") },
+            ],
+            linkHref: "#",
+        },
+    ];
 
     return (
-        <Container >
+        <Container>
             <Box sx={{ position: 'relative', display: "flex", alignItems: "center", gap: 2, mt: 2.5, pt: 2 }}>
                 <Box sx={{ flexGrow: 1, position: 'relative', minWidth: '70%', height: '30rem' }}>
 
@@ -58,13 +60,13 @@ function Hero() {
                         {
                             sliderPages.map((page) => (
                                 <SwiperSlide key={page.link} className='parent-slider'>
-                                    <Image src={page.link} alt='banner-16' layout="fill" />
+                                    <Image src={page.link} alt='banner-16' fill />
                                     <Box
                                         sx={{
                                             [theme.breakpoints.up("sm")]: {
                                                 position: "absolute",
                                                 left: "10%",
-                                                textAlign: "left",
+                                                textAlign: i18n.language == "en" ? "left" : " right",
                                             },
 
                                             [theme.breakpoints.down("sm")]: {
@@ -79,7 +81,7 @@ function Hero() {
                                             }}
                                             variant="h5"
                                         >
-                                            LIFESTYLE COLLECTION
+                                            {t("LIFESTYLE COLLECTION")}
                                         </Typography>
 
                                         <Typography
@@ -101,10 +103,10 @@ function Hero() {
                                             alignItems={"center"}
                                         >
                                             <Typography color={"#333"} mr={1} variant="h5">
-                                                SALE UP TO
+                                                {t("SALE UP TO")}
                                             </Typography>
                                             <Typography color={"#D23F57"} variant="h5">
-                                                30% OFF
+                                                {t("30% OFF")}
                                             </Typography>
                                         </Stack>
 
@@ -115,7 +117,7 @@ function Hero() {
                                             }}
                                             variant="body1"
                                         >
-                                            Get Free Shipping on orders over $99.00
+                                            {t("Get Free Shipping on orders over $99.00")}
                                         </Typography>
 
                                         <Button
@@ -134,7 +136,7 @@ function Hero() {
                                             }}
                                             variant="contained"
                                         >
-                                            shop now
+                                            {t("shop now")}
                                         </Button>
 
                                     </Box>
@@ -153,11 +155,12 @@ function Hero() {
                                 position: 'relative',
                                 width: '100%',
                                 minHeight: '14.75rem',
-                                mb: 1, // Apply margin-bottom to all boxes
-                                ...(index === banners.length - 1 ? { mb: 0 } : {}), // Remove margin-bottom from the last box
+                                mb: 1,
+                                ...(index === banners.length - 1 ? { mb: 0 } : {}),
+                                textAlign: i18n.language == "en" ? "left" : " right",
                             }}
                         >
-                            <Image src={banner.src} alt={banner.alt} layout="fill" />
+                            <Image src={banner.src} alt={banner.alt} fill />
                             <Stack sx={{
                                 position: "absolute",
                                 top: "50%",
@@ -191,7 +194,7 @@ function Hero() {
                                     href={banner.linkHref}
                                     underline="none"
                                 >
-                                    {banner.linkText}
+                                    {t("Shop now")}
                                     <ArrowForwardIcon sx={{ fontSize: "13px" }} />
                                 </Link>
                             </Stack>

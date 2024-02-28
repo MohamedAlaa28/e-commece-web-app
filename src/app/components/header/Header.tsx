@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Box, Container, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useTheme } from "@mui/material";
 import { DarkModeOutlined, ExpandMore, LightModeOutlined } from "@mui/icons-material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { ColorModeContext } from '../../../../public/mui/useMode';
+import { useTranslation } from "react-i18next";
 
 const options = ["AR", "EN"];
 
@@ -15,6 +16,8 @@ const socialIcons = [
 ];
 
 function Header() {
+    const { t, i18n } = useTranslation();
+
     const colorMode = useContext(ColorModeContext);
     if (!colorMode) {
         throw new Error('ColorModeContext not found');
@@ -40,6 +43,7 @@ function Header() {
     };
 
     return (
+
         <Box sx={{ bgcolor: "#2b3445", px: "4px", borderBottomRightRadius: "4px", borderBottomLeftRadius: "4px" }}>
 
             <Container>
@@ -56,7 +60,7 @@ function Header() {
                         }}
                         variant="body2"
                     >
-                        HOT
+                        {t('Hot')}
                     </Typography>
 
                     <Typography
@@ -67,7 +71,7 @@ function Header() {
                         }}
                         variant="body2"
                     >
-                        Free Express Shipping
+                        {t('Free Express Shipping')}
                     </Typography>
 
                     <Box flexGrow={1} />
@@ -122,7 +126,10 @@ function Header() {
                                 sx={{ fontSize: "11px", p: "3px 10px", minHeight: "10px" }}
                                 key={option}
                                 selected={index === selectedIndex}
-                                onClick={(event) => handleMenuItemClick(event, index)}
+                                onClick={(event) => {
+                                    handleMenuItemClick(event, index);
+                                    i18n.changeLanguage(option.toLowerCase());
+                                }}
                             >
                                 {option}
                             </MenuItem>
@@ -136,6 +143,7 @@ function Header() {
             </Container>
 
         </Box>
+
     );
 };
 

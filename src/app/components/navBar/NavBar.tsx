@@ -1,13 +1,12 @@
 import { Accordion, AccordionSummary, Box, Button, Container, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography, useMediaQuery, useTheme } from "@mui/material"
-import { HomeItems, pagesItems, userAccountItems, vendorAccountItems } from "./NavBarDataLinks";
 import { useState } from "react";
 import WindowIcon from "@mui/icons-material/Window";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import { SportsEsportsOutlined, ElectricBikeOutlined, LaptopChromebookOutlined, MenuBookOutlined, Close } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import HeaderLinks from "./NavBarLinks";
-
+import HeaderLinks from "../navBar/NavBarLinks";
+import { useTranslation } from "react-i18next";
 
 const mobileNavigation = [
   { mainLink: "Home", subLinks: ["Link 1", "Link 2", "Link 3"] },
@@ -27,22 +26,6 @@ const mobileNavigation = [
   },
 ];
 
-const Items = (item: string) => {
-  switch (item) {
-      case "Vendor Account":
-          return vendorAccountItems;
-      case "User Account":
-          return userAccountItems;
-
-      case "Pages":
-          return pagesItems;
-
-      case "Home":
-          return HomeItems;
-      default:
-          return vendorAccountItems;
-  }
-}
 const menuItems = [
   { text: "Bikes", Icon: ElectricBikeOutlined },
   { text: "Electronics", Icon: LaptopChromebookOutlined },
@@ -50,8 +33,10 @@ const menuItems = [
   { text: "Games", Icon: SportsEsportsOutlined },
 ];
 
-
 function NavBar() {
+  const theme = useTheme();
+  const { t } = useTranslation();
+
   const desktop = useMediaQuery('(min-width:1200px)');
   const mobile = useMediaQuery('(max-width:1200px)');
 
@@ -65,8 +50,6 @@ function NavBar() {
     setAnchorEl(null);
   };
 
-  const theme = useTheme();
-
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -77,8 +60,6 @@ function NavBar() {
   const toggleDrawer = (anchor: 'top' | 'left' | 'bottom' | 'right', open: boolean) => (event: React.MouseEvent<HTMLButtonElement>) => {
     setState({ ...state, [anchor]: open });
   };
-
-
 
   return (
     <Container sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -140,12 +121,12 @@ function NavBar() {
 
       {desktop &&
         <Stack direction={"row"} gap={4} alignItems={"center"}>
-          <HeaderLinks title={"Home"} />
-          <HeaderLinks title={"Mega Menu"} />
-          <HeaderLinks title={"Full Screen Menu"} />
-          <HeaderLinks title={"Pages"} />
-          <HeaderLinks title={"User Account"} />
-          <HeaderLinks title={"Vendor Account"} />
+          <HeaderLinks title={t('Home')} />
+          <HeaderLinks title={t("Mega Menu")} />
+          <HeaderLinks title={t("Full Screen Menu")} />
+          <HeaderLinks title={t("Pages")} />
+          <HeaderLinks title={t("User Account")} />
+          <HeaderLinks title={t("Vendor Account")} />
         </Stack>
       }
 
@@ -184,7 +165,7 @@ function NavBar() {
             <Accordion
               key={item.mainLink}
               elevation={0}
-              sx={{ bgcolor: "initial"}}
+              sx={{ bgcolor: "initial" }}
             >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

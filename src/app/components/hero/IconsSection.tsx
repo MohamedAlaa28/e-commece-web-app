@@ -4,17 +4,20 @@ import CreditScoreOutlinedIcon from "@mui/icons-material/CreditScoreOutlined";
 import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import AccessAlarmOutlinedIcon from "@mui/icons-material/AccessAlarmOutlined";
 import { useTheme } from "@emotion/react";
+import { t } from "i18next";
 
-const icons = [
-    { title: "Fast Delivery", subTitle: "Start from $10", icon: < ElectricBoltIcon /> },
-    { title: "Money Guarantee", subTitle: "7 Days Back", icon: <WorkspacePremiumOutlinedIcon /> },
-    { title: "365 Days", subTitle: "For free return", icon: <AccessAlarmOutlinedIcon /> },
-    { title: "Payment", subTitle: "Secure system", icon: <CreditScoreOutlinedIcon /> },
-];
+
 const IconsSection = () => {
     const theme = useTheme();
 
     const desktop = useMediaQuery("(min-width:600px)");
+
+    const icons = [
+        { title: t("Fast Delivery"), subTitle: t("Start from $10"), icon: < ElectricBoltIcon /> },
+        { title: t("Money Guarantee"), subTitle: t("7 Days Back"), icon: <WorkspacePremiumOutlinedIcon /> },
+        { title: t("365 Days"), subTitle: t("For free return"), icon: <AccessAlarmOutlinedIcon /> },
+        { title: t("Payment"), subTitle: t("Secure system"), icon: <CreditScoreOutlinedIcon /> },
+    ];
 
     return (
         <Container sx={{
