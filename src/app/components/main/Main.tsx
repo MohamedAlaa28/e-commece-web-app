@@ -8,6 +8,7 @@ import ProductDetails from "./ProductDetails";
 import { useGetProductByNameQuery } from "../../../state/productsData";
 import CircularProgressWithLabel from "./Loading";
 import { ApiResponse, Product } from "./types";
+import { AnimatePresence, motion } from 'framer-motion';
 
 function Main() {
     const theme = useTheme();
@@ -45,7 +46,7 @@ function Main() {
     const menProductsAPI = "products?populate=*&filters[productCategory][$eq]=men";
     const womenProductsAPI = "products?populate=*&filters[productCategory][$eq]=women";
 
-    const [productData, setProductData] = useState(menProductsAPI);
+    const [productData, setProductData] = useState(allProductsAPI);
 
     const { data: responseData, error, isLoading } = useGetProductByNameQuery(productData);
     const data = responseData as ApiResponse;
@@ -110,67 +111,78 @@ function Main() {
                 </Stack>
 
                 <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"}>
-                    {
-                        data.data.map((product: Product) => (
-                            <Card key={product.id} sx={{
-                                maxWidth: 333, mt: 6, ":hover .MuiCardMedia-root": { scale: "1.05", rotate: "1deg", transition: "0.35s" },
-                                bgcolor: theme.palette.mode === "dark" ? "#000" : "#fff",
-                                boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset",
-                            }}>
-                                <CardMedia
-                                    sx={{ height: 277 }}
-                                    image={`${product.attributes.productImage.data[0].attributes.url}`}
-                                    title="green iguana"
-                                />
-                                <CardContent>
-                                    <Stack
-                                        direction={"row"}
-                                        justifyContent={"space-between"}
-                                        alignItems={"center"}
-                                    >
-                                        <Typography gutterBottom variant="h6" component="div"
+                    <AnimatePresence>
+                        {
+                            data.data.map((product: Product) => (
+                                <Card
+                                    component={motion.section}
+                                    layout
+                                    initial={{ transform: "scale(0)" }}
+                                    animate={{ transform: "scale(1)" }}
+                                    transition={{ duration: 1.6, type: "spring", stiffness: 50 }}
+
+                                    key={product.id}
+                                    sx={{
+                                        maxWidth: 333, mt: 6, ":hover .MuiCardMedia-root": { scale: "1.05", rotate: "1deg", transition: "0.35s" },
+                                        bgcolor: theme.palette.mode === "dark" ? "#000" : "#fff",
+                                        boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset",
+                                    }}
+                                >
+                                    <CardMedia
+                                        sx={{ height: 277 }}
+                                        image={`${product.attributes.productImage.data[0].attributes.url}`}
+                                        title="green iguana"
+                                    />
+                                    <CardContent>
+                                        <Stack
+                                            direction={"row"}
+                                            justifyContent={"space-between"}
+                                            alignItems={"center"}
+                                        >
+                                            <Typography gutterBottom variant="h6" component="div"
+                                                sx={{
+                                                    display: '-webkit-box',
+                                                    overflow: 'hidden',
+                                                    WebkitBoxOrient: 'vertical',
+                                                    WebkitLineClamp: 1,
+                                                }}>
+                                                {product.attributes.productTitle}
+                                            </Typography>
+
+                                            <Typography variant="subtitle1" component="p">
+                                                ${product.attributes.productPrice}
+                                            </Typography>
+                                        </Stack>
+
+                                        <Typography variant="body2" color="text.secondary"
                                             sx={{
                                                 display: '-webkit-box',
                                                 overflow: 'hidden',
                                                 WebkitBoxOrient: 'vertical',
-                                                WebkitLineClamp: 1,
+                                                WebkitLineClamp: 3,
                                             }}>
-                                            {product.attributes.productTitle}
+                                            {product.attributes.productDescription}
                                         </Typography>
 
-                                        <Typography variant="subtitle1" component="p">
-                                            ${product.attributes.productPrice}
-                                        </Typography>
-                                    </Stack>
+                                    </CardContent>
 
-                                    <Typography variant="body2" color="text.secondary"
-                                        sx={{
-                                            display: '-webkit-box',
-                                            overflow: 'hidden',
-                                            WebkitBoxOrient: 'vertical',
-                                            WebkitLineClamp: 3,
-                                        }}>
-                                        {product.attributes.productDescription}
-                                    </Typography>
+                                    <CardActions sx={{ justifyContent: "space-between" }}>
+                                        <Button size="large" onClick={() => {
+                                            setSelectedProduct(product)
+                                            handleClickOpen();
+                                        }} sx={{ textTransform: "capitalize" }}>
+                                            <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+                                            Add To Cart
+                                        </Button>
+                                        <Button size="small">
+                                            <Rating name="read-only" value={product.attributes.productRating} precision={0.1} readOnly />
+                                        </Button>
+                                    </CardActions>
 
-                                </CardContent>
-
-                                <CardActions sx={{ justifyContent: "space-between" }}>
-                                    <Button size="large" onClick={() => {
-                                        setSelectedProduct(product)
-                                        handleClickOpen();
-                                    }} sx={{ textTransform: "capitalize" }}>
-                                        <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                                        Add To Cart
-                                    </Button>
-                                    <Button size="small">
-                                        <Rating name="read-only" value={product.attributes.productRating} precision={0.1} readOnly />
-                                    </Button>
-                                </CardActions>
-
-                            </Card>
-                        ))
-                    }
+                                </Card>
+                            ))
+                        }
+                    </AnimatePresence>
                     <Dialog
                         sx={{ ".MuiPaper-root": { minWidth: { xs: "100%", md: 800 } } }}
                         open={open}
@@ -189,8 +201,10 @@ function Main() {
                         >
                             <Close />
                         </IconButton>
+
                         {selectedProduct && <ProductDetails selectedProduct={selectedProduct} />}
                     </Dialog>
+
                 </Stack>
 
             </Container>

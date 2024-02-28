@@ -1,4 +1,5 @@
 import { Accordion, AccordionSummary, Box, Button, Container, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Typography, useMediaQuery, useTheme } from "@mui/material"
+import { HomeItems, pagesItems, userAccountItems, vendorAccountItems } from "./NavBarDataLinks";
 import { useState } from "react";
 import WindowIcon from "@mui/icons-material/Window";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -26,6 +27,22 @@ const mobileNavigation = [
   },
 ];
 
+const Items = (item: string) => {
+  switch (item) {
+      case "Vendor Account":
+          return vendorAccountItems;
+      case "User Account":
+          return userAccountItems;
+
+      case "Pages":
+          return pagesItems;
+
+      case "Home":
+          return HomeItems;
+      default:
+          return vendorAccountItems;
+  }
+}
 const menuItems = [
   { text: "Bikes", Icon: ElectricBikeOutlined },
   { text: "Electronics", Icon: LaptopChromebookOutlined },

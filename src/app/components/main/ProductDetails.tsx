@@ -1,5 +1,5 @@
 import { AddShoppingCartOutlined } from "@mui/icons-material";
-import { Box, Button, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
 import Image from "next/image";
 import { ProductDetailsProps } from "./types";
 import { useState } from "react";
@@ -8,13 +8,6 @@ function ProductDetails({ selectedProduct }: ProductDetailsProps) {
     const theme = useTheme();
 
     const [selectedImage, setSelectedImage] = useState(0);
-
-    const handleAlignment = (event: React.MouseEvent<HTMLElement>, newProductsValue: string) => {
-        if (newProductsValue !== null) {
-            // setProductData(newProductsValue);
-        }
-    };
-
 
     return (
         <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }} bgcolor={
@@ -33,7 +26,7 @@ function ProductDetails({ selectedProduct }: ProductDetailsProps) {
                     {selectedProduct.attributes.productTitle}
                 </Typography>
                 <Typography variant="h6" my={0.4} fontSize={"22px"} color={"crimson"} >
-                    {selectedProduct.attributes.productPrice}
+                    ${selectedProduct.attributes.productPrice}
                 </Typography>
                 <Typography variant="body1">
                     {selectedProduct.attributes.productDescription}
@@ -44,19 +37,14 @@ function ProductDetails({ selectedProduct }: ProductDetailsProps) {
                         color="error"
                         value={selectedImage}
                         exclusive
-                        onChange={handleAlignment}
                         sx={{
-                            ".Mui-selected": {
+                            '.MuiToggleButton-root.Mui-selected': {
+                                // @ts-ignore
+                                color: `${theme.palette.bg.main} !important`,
                                 border: "1px solid royalblue !important",
                                 borderRadius: "3px !important",
                                 opacity: 1,
-                                // @ts-ignore
-                                backgroundColor: theme.palette.bg.main,
                             },
-                            ".Mui-selected:hover": {
-                                // @ts-ignore
-                                backgroundColor: theme.palette.bg.main,
-                            }
                         }}
                     >
                         {
@@ -67,7 +55,7 @@ function ProductDetails({ selectedProduct }: ProductDetailsProps) {
                                     sx={{
                                         mx: 1,
                                         p: "0",
-                                        opacity: "0.5"
+                                        opacity: "0.5",
                                     }}
 
                                 >

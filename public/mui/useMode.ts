@@ -12,10 +12,6 @@ const ColorModeContext = createContext<ColorModeContextType | undefined>(
 );
 
 export const useMode = (): [Theme, ColorModeContextType] => {
-  // const [mode, setMode] = useState(
-  //   (localStorage.getItem("mode") as "light" | "dark") ?? "light"
-  // );
-
   // Initialize state without localStorage
   const [mode, setMode] = useState<"light" | "dark">("light");
 
@@ -45,39 +41,40 @@ export const useMode = (): [Theme, ColorModeContextType] => {
           mode,
           ...(mode === "light"
             ? {
-                text: {
-                  primary: "#2B3445",
-                },
-                neutral: {
-                  main: "#64748B",
-                },
-                favColor: {
-                  main: grey[300],
-                },
-                header: {
-                  main: "#F6F9FC",
-                },
-                bg:{
-                  main:"#F6F6F6",
-                }
+              text: {
+                primary: "#2B3445",
+              },
+              neutral: {
+                main: "#64748B",
+              },
+              favColor: {
+                main: grey[300],
+              },
+              header: {
+                main: "#F6F9FC",
+              },
+              bg: {
+                main: "#F6F6F6",
               }
+            }
             : {
-                neutral: {
-                  main: "#64748B",
-                },
-                favColor: {
-                  main: grey[800],
-                },
-                text: {
-                  primary: "#fff",
-                },
-                header: {
-                  main: "#252b32",
-                },
-                bg:{
-                  main:"#1D2021",
-                }
-              }),
+              text: {
+                primary: "#fff",
+              },
+              neutral: {
+                main: "#64748B",
+              },
+              favColor: {
+                main: grey[800],
+              },
+
+              header: {
+                main: "#252b32",
+              },
+              bg: {
+                main: "#1D2021",
+              }
+            }),
         },
       }),
     [mode]
