@@ -66,7 +66,7 @@ function Hero() {
                                             [theme.breakpoints.up("sm")]: {
                                                 position: "absolute",
                                                 left: "10%",
-                                                textAlign: i18n.language == "en" ? "left" : " right",
+                                                textAlign: i18n.language == "ar" ? " right" : "left",
                                             },
 
                                             [theme.breakpoints.down("sm")]: {
@@ -157,7 +157,7 @@ function Hero() {
                                 minHeight: '14.75rem',
                                 mb: 1,
                                 ...(index === banners.length - 1 ? { mb: 0 } : {}),
-                                textAlign: i18n.language == "en" ? "left" : " right",
+                                textAlign: i18n.language == "ar" ? " right" : "left",
                             }}
                         >
                             <Image src={banner.src} alt={banner.alt} fill />

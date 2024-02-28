@@ -15,17 +15,20 @@ function Home() {
   const [theme, colorMode] = useMode();
   const [isHydrated, setIsHydrated] = useState(false);
   const { t, i18n } = useTranslation();
-  useEffect(() => {
-    i18n.changeLanguage("eng");
-  }, []);
-  
+
+
   useEffect(() => {
     setIsHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    i18n.changeLanguage("eng");
   }, []);
 
   if (!isHydrated) {
     return null;
   }
+
 
   return (
     <ColorModeContext.Provider value={colorMode}>
