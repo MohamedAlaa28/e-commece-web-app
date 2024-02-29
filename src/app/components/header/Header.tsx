@@ -7,7 +7,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { ColorModeContext } from '../../../../public/mui/useMode';
 import { useTranslation } from "react-i18next";
 
-const options = ["AR", "EN"];
+const options = ["AR", "EN", "GR"];
 
 const socialIcons = [
     { Icon: TwitterIcon, sx: { fontSize: "16px", color: "#fff" } },
@@ -50,7 +50,8 @@ function Header() {
                 <Stack direction={"row"} alignItems={"center"}>
                     <Typography
                         sx={{
-                            mr: 2,
+                            mr: i18n.language === "ar" ? 0 : 2,
+                            ml: i18n.language === "ar" ? 2 : 0,
                             p: "4px 10px",
                             bgcolor: "#D23F57",
                             borderRadius: "12px",

@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 function Footer() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <Box
             sx={{
@@ -15,7 +15,6 @@ function Footer() {
             <Typography
                 justifyContent={"center"}
                 display={"flex"}
-                flexDirection={i18n.language == "ar" ? "row-reverse" : "row"}
                 alignItems={"center"}
                 color={"HighlightText"}
                 variant="h6"

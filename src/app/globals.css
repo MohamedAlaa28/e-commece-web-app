@@ -6,6 +6,9 @@
 html {
   scroll-behavior: smooth;
 }
+html .ar {
+  direction: rtl;
+}
 ::-webkit-scrollbar {
   width: 0.7rem;
 }

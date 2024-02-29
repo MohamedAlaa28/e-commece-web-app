@@ -1,3 +1,12 @@
+import { SportsEsportsOutlined, ElectricBikeOutlined, LaptopChromebookOutlined, MenuBookOutlined } from "@mui/icons-material";
+
+export const menuItems = [
+    { text: "Bikes", Icon: ElectricBikeOutlined },
+    { text: "Electronics", Icon: LaptopChromebookOutlined },
+    { text: "Books", Icon: MenuBookOutlined },
+    { text: "Games", Icon: SportsEsportsOutlined },
+];
+
 export const vendorAccountItems = [
     { id: "dashboard", title: "Dashboard", subLinks: [] },
     {
@@ -124,4 +133,3 @@ export const HomeItems = [
     { id: "furniture2", title: "Furniture 2", subLinks: [] },
     { id: "healthAndBeauty", title: "Health and Beauty", subLinks: [] },
 ];
-

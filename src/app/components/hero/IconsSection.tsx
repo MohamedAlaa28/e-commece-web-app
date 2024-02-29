@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const IconsSection = () => {
     const theme = useTheme();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const desktop = useMediaQuery("(min-width:600px)");
 
@@ -39,12 +39,10 @@ const IconsSection = () => {
                         width: 250,
                         py: 1.6,
                         display: "flex",
-                        flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
                         flexGrow: 1,
                         gap: 3,
                         alignItems: "center",
-                        textAlign: i18n.language == "ar" ? " right" : "left",
-                        justifyContent: desktop ? "center" : i18n.language == "ar" ? "right" : "left",
+                        justifyContent: desktop ? "center" : "left",
                     }}>
                         {item.icon}
                         <Box>

@@ -30,10 +30,10 @@ function SearchBar() {
     setAnchorEl(null);
   };
 
-  const options = [t("All Categories"), t("CAR"), t("Clothes"), t("Electronics")];
+  const options = ["All Categories", "CAR", "Clothes", "Electronics"];
 
   return (
-    <Container sx={{ my: 3, display: "flex", justifyContent: "space-between" }}>
+    <Container sx={{ my: 3, display: "flex", justifyContent: "space-between", gap: 2.5 }}>
       {desktop &&
         <Stack alignItems={"center"} direction={"row"} gap={1}>
           <StoreSharp />
@@ -56,8 +56,10 @@ function SearchBar() {
             sx={{
               // @ts-ignore
               bgcolor: theme.palette.header.main,
-              borderBottomRightRadius: 22,
-              borderTopRightRadius: 22,
+              borderBottomRightRadius: i18n.language == "ar" ? 0 : 22,
+              borderTopRightRadius: i18n.language == "ar" ? 0 : 22,
+              borderBottomLeftRadius: i18n.language == "ar" ? 22 : 0,
+              borderTopLeftRadius: i18n.language == "ar" ? 22 : 0,
               p: "0",
             }}
           >
@@ -72,11 +74,11 @@ function SearchBar() {
               <ListItemText
                 // className="border"
                 sx={{
-                  width: 93,
+                  minWidth: 93,
                   textAlign: "center",
                   "&:hover": { cursor: "pointer" },
                 }}
-                secondary={options[selectedIndex]}
+                secondary={t(options[selectedIndex])}
               />
               <ExpandMore sx={{ fontSize: "16px" }} />
             </ListItem>
@@ -91,19 +93,16 @@ function SearchBar() {
               "aria-labelledby": "lock-button",
               role: "listbox",
             }}
+            sx={{ ml: i18n.language === "ar" ? 1.25 : undefined }}
           >
             {options.map((option, index) => (
               <MenuItem
-                sx={{
-                  fontSize: "13px",
-                  flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
-                  textAlign: i18n.language == "ar" ? " right" : "left"
-                }}
+                sx={{ fontSize: "13px", direction: i18n.language === "ar" ? "rtl" : "ltr", minWidth: 130 }}
                 key={option}
                 selected={index === selectedIndex}
                 onClick={(event) => handleMenuItemClick(event, index)}
               >
-                {option}
+                {t(option)}
               </MenuItem>
             ))}
           </Menu>

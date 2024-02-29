@@ -1,6 +1,7 @@
 import { Badge, InputBase } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+
 export const Search = styled("div")(({ theme }) => ({
   display: "flex",
   borderRadius: "22px",
@@ -11,13 +12,12 @@ export const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     border: "1px solid #333",
   },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "266px",
-  // height:"46px",
+  // marginRight: theme.spacing(2),
+  // marginLeft: 0,
+  // width: "266px",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "330px",
+    // marginLeft: theme.spacing(3),
+    // width: "330px",
   },
 }));
 
@@ -44,6 +44,10 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
       width: "20ch",
     },
   },
+  ".ar & .MuiInputBase-input": {
+    paddingRight: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: 0,
+  }
 }));
 
 export const StyledBadge = styled(Badge)(({ theme }) => ({

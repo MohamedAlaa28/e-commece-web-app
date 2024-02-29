@@ -3,6 +3,8 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import arabic from "./languages/ar.json";
 import english from "./languages/en.json";
+import french from "./languages/fr.json";
+import germany from "./languages/gr.json";
 
 const resources = {
     en: {
@@ -10,6 +12,12 @@ const resources = {
     },
     ar: {
         translation: arabic,
+    },
+    fr: {
+        translation: french,
+    },
+    gr: {
+        translation: germany,
     },
 };
 

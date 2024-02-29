@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 
 function Main() {
     const theme = useTheme();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const handleAlignment = (event: React.MouseEvent<HTMLElement>, newProductsValue: string) => {
         if (newProductsValue !== null) {
@@ -58,8 +58,8 @@ function Main() {
     if (data) {
         return (
             <Container sx={{ py: 9 }}>
-                <Stack direction={i18n.language == "ar" ? "row-reverse" : "row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
-                    <Box sx={{ textAlign: i18n.language == "ar" ? " right" : "left" }}>
+                <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
+                    <Box>
                         <Typography variant="h6">{t("Selected Products")}</Typography>
                         <Typography fontWeight={300} variant="body1">
                             {t("All our new arrivals in a exclusive brand selection")}
@@ -148,7 +148,7 @@ function Main() {
                                                     WebkitBoxOrient: 'vertical',
                                                     WebkitLineClamp: 1,
                                                 }}>
-                                                {product.attributes.productTitle}
+                                                {t(product.attributes.productTitle)}
                                             </Typography>
 
                                             <Typography variant="subtitle1" component="p">
@@ -169,14 +169,14 @@ function Main() {
                                     </CardContent>
 
                                     <CardActions sx={{ justifyContent: "space-between" }}>
-                                        <Button size="large" onClick={() => {
+                                        <Button size="medium" onClick={() => {
                                             setSelectedProduct(product)
                                             handleClickOpen();
-                                        }} sx={{ textTransform: "capitalize" }}>
-                                            <AddShoppingCartOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-                                            Add To Cart
+                                        }} sx={{ textTransform: "capitalize", gap: 1 }}>
+                                            <AddShoppingCartOutlinedIcon fontSize="small" />
+                                            {t("Add To Cart")}
                                         </Button>
-                                        <Button size="small">
+                                        <Button size="small" sx={{ "&.MuiButton-root": { direction: "ltr" } }}>
                                             <Rating name="read-only" value={product.attributes.productRating} precision={0.1} readOnly />
                                         </Button>
                                     </CardActions>

@@ -8,8 +8,7 @@ import "swiper/css/pagination";
 import "./sliderStyle.css";
 import IconsSection from './IconsSection';
 import { useTranslation } from "react-i18next";
-
-
+import { useEffect, useState } from 'react';
 
 function Hero() {
     const theme = useTheme();
@@ -43,19 +42,18 @@ function Hero() {
         },
     ];
 
+    const [key, setKey] = useState(Math.random());
+
+    useEffect(() => {
+        // Reinitialize Swiper by changing key prop
+        setKey(Math.random());
+    }, [i18n.language]);
     return (
         <Container>
             <Box sx={{ position: 'relative', display: "flex", alignItems: "center", gap: 2, mt: 2.5, pt: 2 }}>
                 <Box sx={{ flexGrow: 1, position: 'relative', minWidth: '70%', height: '30rem' }}>
 
-                    <Swiper
-                        loop={true}
-                        pagination={{
-                            dynamicBullets: true,
-                        }}
-                        modules={[Pagination]}
-                        className="mySwiper"
-                    >
+                    <Swiper className="mySwiper" key={key} modules={[Pagination]} pagination={{ dynamicBullets: true }} loop={true}>
                         {
                             sliderPages.map((page) => (
                                 <SwiperSlide key={page.link} className='parent-slider'>
@@ -98,7 +96,7 @@ function Hero() {
                                             sx={{
                                                 justifyContent: { xs: "center", sm: i18n.language == "ar" ? " right" : "left" },
                                             }}
-                                            direction={i18n.language == "ar" ? "row-reverse" : "row"}
+                                            direction={"row"}
                                             gap={1}
                                             alignItems={"center"}
                                         >
@@ -157,15 +155,15 @@ function Hero() {
                                 minHeight: '14.75rem',
                                 mb: 1,
                                 ...(index === banners.length - 1 ? { mb: 0 } : {}),
-                                textAlign: i18n.language == "ar" ? " right" : "left",
                             }}
                         >
-                            <Image src={banner.src} alt={banner.alt} fill />
+                            <Image src={banner.src} alt={banner.alt} fill style={{ transform: i18n.language != "ar" ? "scaleX(1)" : "scaleX(-1)" }} />
                             <Stack sx={{
                                 position: "absolute",
                                 top: "50%",
                                 transform: "translateY(-50%)",
-                                left: 31,
+                                left: i18n.language != "ar" ? 31 : undefined,
+                                right: i18n.language == "ar" ? 31 : undefined,
                             }}>
                                 {banner.captions.map((caption, captionIndex) => (
                                     <Typography
@@ -184,7 +182,6 @@ function Hero() {
                                     sx={{
                                         color: "#2B3445",
                                         display: "flex",
-                                        flexDirection: i18n.language == "ar" ? "row-reverse" : "row",
                                         alignItems: "center",
                                         gap: "5px",
                                         transition: "0.2s",
