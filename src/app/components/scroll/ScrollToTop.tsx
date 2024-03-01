@@ -6,7 +6,7 @@ function ScrollToTop() {
     // const handleClick
     return (
         <Zoom in={useScrollTrigger({ threshold: 100 })}>
-            <Fab sx={{ position: "fixed", bottom: 33, right: 33 }}
+            <Fab sx={{ position: "fixed", bottom: 33, right: 33, backgroundColor: "#d23f57","&:hover":{backgroundColor: "#9D4352"} }}
                 size="small" variant="extended" color="primary" aria-label="add"
                 onClick={() => scrollTo(0, 0)}>
                 <KeyboardArrowUp />

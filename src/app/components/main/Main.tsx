@@ -75,7 +75,7 @@ function Main() {
                         sx={{
                             ".Mui-selected": {
                                 border: "1px solid rgba(233, 69, 96, 0.5) !important",
-                                color: "#e94560",
+                                color: "#d23f57",
                                 backgroundColor: "initial",
                             },
                         }}
@@ -169,10 +169,14 @@ function Main() {
                                     </CardContent>
 
                                     <CardActions sx={{ justifyContent: "space-between" }}>
-                                        <Button size="medium" onClick={() => {
-                                            setSelectedProduct(product)
-                                            handleClickOpen();
-                                        }} sx={{ textTransform: "capitalize", gap: 1 }}>
+                                        <Button
+                                            size={t("Add To Cart").length > 10 ? "medium" : "large"}
+                                            onClick={() => {
+                                                setSelectedProduct(product);
+                                                handleClickOpen();
+                                            }}
+                                            sx={{ textTransform: "capitalize", gap: 1, color: "#d23f57" }}
+                                        >
                                             <AddShoppingCartOutlinedIcon fontSize="small" />
                                             {t("Add To Cart")}
                                         </Button>
@@ -194,11 +198,14 @@ function Main() {
                     >
                         <IconButton
                             sx={{
-                                ":hover": { color: "red", rotate: "180deg", transition: "0.3s" },
+                                ":hover": { color: "#d23f57", rotate: "180deg" },
                                 position: "absolute",
                                 top: 11,
                                 right: 11,
+                                backgroundColor: "rgba(233, 69, 96, 0.2)",
+                                transition: "0.3s"
                             }}
+                            size='small'
                             onClick={handleClose}
                         >
                             <Close />

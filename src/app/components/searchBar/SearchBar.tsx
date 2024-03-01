@@ -1,11 +1,11 @@
 import { Container, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useMediaQuery, useTheme } from "@mui/material"
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import { ExpandMore, StoreSharp } from "@mui/icons-material";
-import { StyledBadge, StyledInputBase, SearchIconWrapper, Search } from "./muiSearchBarStyle";
+import { StyledInputBase, SearchIconWrapper, Search } from "./muiSearchBarStyle";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Cart from "./Cart";
 
 function SearchBar() {
   const theme = useTheme();
@@ -111,11 +111,12 @@ function SearchBar() {
       </Search>
 
       <Stack direction={"row"} alignItems={"center"}>
-        <IconButton aria-label="cart">
+        {/* <IconButton aria-label="cart">
           <StyledBadge badgeContent={4} color="primary">
             <ShoppingCartIcon />
           </StyledBadge>
-        </IconButton>
+        </IconButton> */}
+        <Cart />
 
         <IconButton>
           <Person2OutlinedIcon />

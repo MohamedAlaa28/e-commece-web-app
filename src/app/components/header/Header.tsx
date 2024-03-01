@@ -7,7 +7,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { ColorModeContext } from '../../../../public/mui/useMode';
 import { useTranslation } from "react-i18next";
 
-const options = ["AR", "EN", "GR"];
+const options = ["EN", "AR", "GR"];
 
 const socialIcons = [
     { Icon: TwitterIcon, sx: { fontSize: "16px", color: "#fff" } },
@@ -26,7 +26,11 @@ function Header() {
     const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [selectedIndex, setSelectedIndex] = useState<number>(1);
+
+    const savedLanguage = localStorage.getItem('language');
+    const initialIndex = options.findIndex(option => option.toLowerCase() === savedLanguage?.toLowerCase()) ?? 0;
+    const [selectedIndex, setSelectedIndex] = useState<number>(initialIndex);
+
     const open = Boolean(anchorEl);
 
     const handleClickListItem = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,6 +38,9 @@ function Header() {
     };
 
     const handleMenuItemClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
+        const selectedLanguage = options[index].toLowerCase();
+        localStorage.setItem('language', selectedLanguage);
+        i18n.changeLanguage(selectedLanguage);
         setSelectedIndex(index);
         setAnchorEl(null);
     };

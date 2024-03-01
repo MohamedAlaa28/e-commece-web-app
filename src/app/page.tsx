@@ -13,12 +13,12 @@ import '../i18n';
 function Home() {
   const [theme, colorMode] = useMode();
   const [isHydrated, setIsHydrated] = useState(false);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
 
   useEffect(() => {
     setIsHydrated(true);
-    i18n.changeLanguage("eng");
+    i18n.changeLanguage(localStorage.getItem('language') ?? "eng");
   }, [i18n]);
 
   if (!isHydrated) {

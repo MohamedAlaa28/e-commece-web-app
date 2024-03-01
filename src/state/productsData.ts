@@ -6,10 +6,10 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: `${process.env.NEXT_PUBLIC_API_KEY}/api` }),
   endpoints: (builder) => ({
     getProductByName: builder.query
-    // <product, string>
-    ({
-      query: (name) => `${name}`,
-    }),
+      // <product, string>
+      ({
+        query: (name) => `${name}`,
+      }),
   }),
 })
 

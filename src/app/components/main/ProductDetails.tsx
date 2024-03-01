@@ -40,8 +40,8 @@ function ProductDetails({ selectedProduct }: ProductDetailsProps) {
                         sx={{
                             '.MuiToggleButton-root.Mui-selected': {
                                 // @ts-ignore
-                                color: `${theme.palette.bg.main} !important`,
-                                border: "1px solid royalblue !important",
+                                // color: `${theme.palette.bg.main} !important`,
+                                border: "1px solid #D23F57 !important",
                                 borderRadius: "3px !important",
                                 opacity: 1,
                             },
@@ -73,7 +73,7 @@ function ProductDetails({ selectedProduct }: ProductDetailsProps) {
                 </Stack>
 
                 <Button
-                    sx={{ mb: { xs: 1, sm: 0 }, textTransform: "capitalize" }}
+                    sx={{ mb: { xs: 1, sm: 0 }, textTransform: "capitalize", backgroundColor: "#D23F57", "&:hover": { backgroundColor: "#9D4352" } }}
                     variant="contained"
                 >
                     <AddShoppingCartOutlined sx={{ mr: 1 }} fontSize="small" />

@@ -57,12 +57,13 @@ function Hero() {
                         {
                             sliderPages.map((page) => (
                                 <SwiperSlide key={page.link} className='parent-slider'>
-                                    <Image src={page.link} alt='banner-16' fill />
+                                    <Image src={page.link} alt='banner-16' fill style={{ transform: i18n.language != "ar" ? "scaleX(1)" : "scaleX(-1)" }} />
                                     <Box
                                         sx={{
                                             [theme.breakpoints.up("sm")]: {
                                                 position: "absolute",
-                                                left: "10%",
+                                                right: i18n.language == "ar" ? "10%" : undefined,
+                                                left: i18n.language != "ar" ? "10%" : undefined,
                                                 textAlign: i18n.language == "ar" ? " right" : "left",
                                             },
 
