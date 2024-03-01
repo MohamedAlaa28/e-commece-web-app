@@ -58,7 +58,7 @@ function Cart() {
 
                             <ListItemIcon>
                                 <Box sx={{ display: "flex" }}>
-                                    <Image src="/images/1.jpg" alt="product" width={60} height={60}
+                                    <Image src="https://res.cloudinary.com/dgslg1dg2/image/upload/v1709066376/Mens_NASA_Space_Bear_Print_O_Neck_Casual_Loose_Short_Sleeve_T_Shirt_aa8560cbc5.png" alt="product" width={55} height={65}
                                         style={{
                                             borderRadius: 3,
                                             boxShadow: "rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset",

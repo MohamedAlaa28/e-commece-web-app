@@ -28,8 +28,8 @@ function Header() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const savedLanguage = localStorage.getItem('language');
-    const initialIndex = options.findIndex(option => option.toLowerCase() === savedLanguage?.toLowerCase()) ?? 0;
-    const [selectedIndex, setSelectedIndex] = useState<number>(initialIndex);
+    const initialIndex = options.findIndex(option => option.toLowerCase() === savedLanguage?.toLowerCase());
+    const [selectedIndex, setSelectedIndex] = useState<number>(initialIndex >= 0 ? initialIndex : 0);
 
     const open = Boolean(anchorEl);
 
@@ -41,6 +41,7 @@ function Header() {
         const selectedLanguage = options[index].toLowerCase();
         localStorage.setItem('language', selectedLanguage);
         i18n.changeLanguage(selectedLanguage);
+        // console.log(index);
         setSelectedIndex(index);
         setAnchorEl(null);
     };
