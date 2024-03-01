@@ -38,13 +38,18 @@ function NavBarMenu() {
                 }}
             >
                 <Box sx={{ width: "100%", mx: "auto", mt: 6, position: "relative", pt: 10 }}>
-                    <IconButton onClick={toggleDrawer("top", false)}
+                    <IconButton
                         sx={{
-                            ":hover": { color: "red", rotate: "180deg", transition: "0.3s" },
+                            ":hover": { color: "#d23f57", rotate: "180deg" },
+                            backgroundColor: "rgba(233, 69, 96, 0.2)",
+                            transition: "0.3s",
                             position: "absolute",
                             top: 0,
                             right: 10,
-                        }}>
+                        }}
+                        size='small'
+                        onClick={toggleDrawer("top", false)}
+                    >
                         <Close />
                     </IconButton>
                     {drawerItems.map((drawerItem) => (

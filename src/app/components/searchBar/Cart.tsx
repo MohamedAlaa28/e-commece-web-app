@@ -45,7 +45,7 @@ function Cart() {
     const list = (anchor: Anchor) => (
         <Box
             sx={{
-                width: 343,
+                width: 375,
             }}
             role="presentation"
         // onClick={toggleDrawer(anchor, false)}

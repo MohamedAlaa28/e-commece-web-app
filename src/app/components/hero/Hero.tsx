@@ -135,7 +135,7 @@ function Hero() {
                                             }}
                                             variant="contained"
                                         >
-                                            {t("shop now")}
+                                            {t("Shop now")}
                                         </Button>
 
                                     </Box>

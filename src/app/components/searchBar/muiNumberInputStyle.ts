@@ -48,7 +48,7 @@ export const StyledInput = styled('input')(
     box-shadow: 0px 2px 4px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.5)' : 'rgba(0,0,0, 0.05)'
     };
     border-radius: 3px;
-    margin: 0 2px;
+    margin: 0 5px;
     padding: 5px 3px;
     outline: 0;
     min-width: 0;
