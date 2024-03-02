@@ -34,6 +34,7 @@ function CartItem() {
                         <ListItemButton disableRipple sx={{
                             gap: 1,
                             textAlign: i18n.language == "ar" ? "right" : "left",
+                            cursor: "context-menu",
                             "&:hover": {
                                 backgroundColor:
                                     // @ts-ignore
