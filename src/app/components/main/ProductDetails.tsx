@@ -3,9 +3,9 @@ import { Box, Button, Stack, ToggleButton, ToggleButtonGroup, Typography, useThe
 import Image from "next/image";
 import { Product } from "../../types";
 import { useState } from "react";
-import { AppDispatch } from "@/state/store";
-import { useDispatch } from "react-redux";
-import { addToCart } from "@/state/cartSlice";
+import { AppDispatch, RootState } from "@/state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, cartToggle } from "@/state/cartSlice";
 
 interface Props {
     selectedProduct: Product;
@@ -17,6 +17,8 @@ function ProductDetails({ selectedProduct, handleClose }: Props) {
     const [selectedImage, setSelectedImage] = useState(0);
 
     const dispatch = useDispatch<AppDispatch>();
+
+    const cartProducts = useSelector((state: RootState) => state.cart);
 
     return (
         <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
@@ -91,13 +93,15 @@ function ProductDetails({ selectedProduct, handleClose }: Props) {
                     }}
                     variant="contained"
                     onClick={() => {
-                        dispatch(addToCart({ item: selectedProduct, image: selectedImage }))
-                        handleClose()
+                        dispatch(addToCart({ item: selectedProduct, image: selectedImage }));
+                        handleClose();
+                        dispatch(cartToggle(true)); // Open the cart drawer
                     }}
                 >
                     <AddShoppingCartOutlined sx={{ mr: 1 }} fontSize="small" />
                     Buy now
                 </Button>
+
             </Box>
         </Box >
     )

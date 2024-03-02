@@ -8,32 +8,30 @@ import { useTranslation } from "react-i18next";
 import { Close } from '@mui/icons-material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import CartItem from './CartItem';
-import { RootState } from '@/state/store';
-import { useSelector } from 'react-redux';
-
-type Anchor = 'left' | 'right';
+import { AppDispatch, RootState } from '@/state/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { Anchor } from '@/app/types';
+import { cartToggle } from '@/state/cartSlice';
 
 function Cart() {
     const theme = useTheme();
     const { t, i18n } = useTranslation();
 
-    const [state, setState] = useState({
-        left: false,
-        right: false,
-    });
+    // const [state, setState] = useState({
+    //     left: false,
+    //     right: false,
+    // });
+    const dispatch = useDispatch<AppDispatch>();
 
-    const toggleDrawer =
-        (anchor: Anchor, open: boolean) =>
-            (event: React.KeyboardEvent | React.MouseEvent) => {
-                if (
-                    event.type === 'keydown' &&
-                    ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')
-                ) {
-                    return;
-                }
-
-                setState({ ...state, [anchor]: open });
-            };
+    const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+            event.type === 'keydown' &&
+            ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+            return;
+        }
+        dispatch(cartToggle(open))
+    };
 
     const [anchor, setAnchor] = useState<Anchor>('right');
 
@@ -61,7 +59,7 @@ function Cart() {
 
     return (
         <Stack>
-            <IconButton aria-label="cart" onClick={toggleDrawer(anchor, true)}>
+            <IconButton aria-label="cart" onClick={toggleDrawer(true)}>
                 <StyledBadge badgeContent={cartProducts.cartCount.length} color="primary" sx={{ padding: 0, ".MuiBadge-badge": { backgroundColor: "#d23f57" } }}>
                     <ShoppingCartIcon sx={{ padding: 0 }} />
                 </StyledBadge>
@@ -69,8 +67,8 @@ function Cart() {
 
             <Drawer
                 anchor={anchor}
-                open={state[anchor]}
-                onClose={toggleDrawer(anchor, false)}
+                open={cartProducts.cartState}
+                onClose={() => dispatch(cartToggle(false))}
                 sx={{
                     "& .MuiPaper-root": {
                         // @ts-ignore
@@ -95,8 +93,8 @@ function Cart() {
                             transition: "0.3s"
                         }}
                         size='small'
-                        onClick={toggleDrawer(anchor, false)}
-                        onKeyDown={toggleDrawer(anchor, false)}
+                        onClick={toggleDrawer(false)}
+                        onKeyDown={toggleDrawer(false)}
                     >
                         <Close />
                     </IconButton>

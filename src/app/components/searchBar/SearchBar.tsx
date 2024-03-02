@@ -36,7 +36,7 @@ function SearchBar() {
     <Container sx={{ my: 3, display: "flex", justifyContent: "space-between", gap: 2.5 }}>
       {desktop &&
         <Stack alignItems={"center"} direction={"row"} gap={1}>
-          <StoreSharp fontSize="large" />
+           <StoreSharp fontSize="large" />
           <Typography variant="h5" fontWeight={500}>Mercado</Typography>
         </Stack>
       }

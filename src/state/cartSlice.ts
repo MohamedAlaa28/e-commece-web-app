@@ -7,6 +7,7 @@ const initialState: CartState = {
     cartItems: [],
     cartCount: [],
     cartImage: [],
+    cartState: false,
     status: 'idle',
     error: null,
 };
@@ -35,9 +36,12 @@ const cartSlice = createSlice({
                 default:
                     break;
             }
-        }
+        },
+        cartToggle: (state, action) => {
+            state.cartState = action.payload;
+        },
     },
 });
 
 export default cartSlice.reducer;
-export const { addToCart, cartRemoveItem, countChange } = cartSlice.actions;
+export const { addToCart, cartRemoveItem, countChange, cartToggle } = cartSlice.actions;

@@ -35,6 +35,9 @@ export interface CartState {
     cartItems: Product[];
     cartCount: number[];
     cartImage: number[];
+    cartState: boolean;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
 }
+
+export type Anchor = 'left' | 'right';
