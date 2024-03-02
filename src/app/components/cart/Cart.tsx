@@ -60,10 +60,10 @@ function Cart() {
     }
 
     return (
-        <Container>
+        <Stack>
             <IconButton aria-label="cart" onClick={toggleDrawer(anchor, true)}>
-                <StyledBadge badgeContent={cartProducts.cartCount.length} color="primary" sx={{ ".MuiBadge-badge": { backgroundColor: "#d23f57" } }}>
-                    <ShoppingCartIcon />
+                <StyledBadge badgeContent={cartProducts.cartCount.length} color="primary" sx={{ padding: 0, ".MuiBadge-badge": { backgroundColor: "#d23f57" } }}>
+                    <ShoppingCartIcon sx={{ padding: 0 }} />
                 </StyledBadge>
             </IconButton>
 
@@ -202,7 +202,7 @@ function Cart() {
 
             </Drawer>
 
-        </Container>
+        </Stack>
     );
 }
 
