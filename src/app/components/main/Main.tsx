@@ -5,57 +5,63 @@ import "./buttonsStyle.css";
 import { useEffect, useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import ProductDetails from "./ProductDetails";
-import { useGetProductByNameQuery } from "../../../state/productsData";
+import { fetchAllProducts } from "../../../state/productsSlice";
 import CircularProgressWithLabel from "./Loading";
-import { ApiResponse, Product } from "./types";
+import { Product } from "../../types";
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/state/store";
+
 
 function Main() {
     const theme = useTheme();
     const { t } = useTranslation();
 
-    const handleAlignment = (event: React.MouseEvent<HTMLElement>, newProductsValue: string) => {
-        if (newProductsValue !== null) {
-            setProductData(newProductsValue);
-        }
-    };
+    const ProductsState = useSelector((state: RootState) => state.products);
 
+    const dispatch = useDispatch<AppDispatch>();
+    useEffect(() => {
+        dispatch(fetchAllProducts());
+    }, [dispatch]);
+
+
+    ///product details popup
     const [open, setOpen] = useState(false);
-
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };
 
+    ///toggle buttons
+    const [selectedCategory, setSelectedCategory] = useState('allProducts');
 
-    const [progress, setProgress] = useState(10);
+    const handleAlignment = (event: React.MouseEvent<HTMLElement>, newCategory: string) => {
+        if (newCategory !== null) {
+            setSelectedCategory(newCategory);
+        }
+    };
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
-        }, 800);
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
+    const displayedProducts = useSelector((state: RootState) => {
+        if (selectedCategory === 'allProducts') {
+            return state.products.allProducts;
+        } else if (selectedCategory === 'menProducts') {
+            return state.products.menProducts;
+        } else if (selectedCategory === 'womenProducts') {
+            return state.products.womenProducts;
+        }
+    });
 
-
-    const allProductsAPI = "products?populate=*";
-    const menProductsAPI = "products?populate=*&filters[productCategory][$eq]=men";
-    const womenProductsAPI = "products?populate=*&filters[productCategory][$eq]=women";
-
-    const [productData, setProductData] = useState(allProductsAPI);
-
-    const { data: responseData, error, isLoading } = useGetProductByNameQuery(productData);
-    const data = responseData as ApiResponse;
-
+    ///add to cart product
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-    if (data) {
+    if (ProductsState.status === 'loading') {
+        return <CircularProgressWithLabel />;
+    } else if (ProductsState.status === 'failed') {
+        return <div>Error loading products</div>;
+    } else if (ProductsState.status === 'succeeded') {
         return (
             <Container sx={{ py: 9 }}>
                 <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"} gap={3}>
@@ -68,7 +74,7 @@ function Main() {
 
                     <ToggleButtonGroup
                         color="error"
-                        value={productData}
+                        value={selectedCategory}
                         exclusive
                         aria-label="text alignment"
                         onChange={handleAlignment}
@@ -83,9 +89,8 @@ function Main() {
                         <ToggleButton
                             sx={{ color: theme.palette.text.primary }}
                             className="toggle-Button"
-                            value={allProductsAPI}
+                            value="allProducts"
                             aria-label="left aligned"
-
                         >
                             {t("All Products")}
                         </ToggleButton>
@@ -93,7 +98,7 @@ function Main() {
                         <ToggleButton
                             sx={{ mx: "16px !important", color: theme.palette.text.primary }}
                             className="toggle-Button"
-                            value={menProductsAPI}
+                            value="menProducts"
                             aria-label="centered"
 
                         >
@@ -103,9 +108,8 @@ function Main() {
                         <ToggleButton
                             sx={{ color: theme.palette.text.primary }}
                             className="toggle-Button"
-                            value={womenProductsAPI}
+                            value="womenProducts"
                             aria-label="right aligned"
-
                         >
                             {t("Women category")}
                         </ToggleButton>
@@ -114,8 +118,9 @@ function Main() {
 
                 <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} flexWrap={"wrap"}>
                     <AnimatePresence>
+
                         {
-                            data.data.map((product: Product) => (
+                            displayedProducts?.map((product: Product) => (
                                 <Card
                                     component={motion.section}
                                     layout
@@ -211,35 +216,13 @@ function Main() {
                             <Close />
                         </IconButton>
 
-                        {selectedProduct && <ProductDetails selectedProduct={selectedProduct} />}
+                        {selectedProduct && <ProductDetails selectedProduct={selectedProduct} handleClose ={handleClose}/>}
                     </Dialog>
 
                 </Stack>
 
             </Container>
         )
-    }
-    if (isLoading) {
-        return <CircularProgressWithLabel value={progress} />;
-    }
-    if (error) {
-        let errorMessage = 'An error occurred';
-
-        if ('error' in error) {
-        } else if ('status' in error && typeof error.status === 'number') {
-            errorMessage = `Server responded with status code: ${error.status}`;
-            if (typeof error.data === 'string') {
-                errorMessage += ` - ${error.data}`;
-            }
-        }
-
-        return (
-            <Container sx={{ py: 11, textAlign: "center" }}>
-                <Typography variant="h6" component="p">{errorMessage}</Typography>
-                <Typography variant="h6" component="p">please try again later</Typography>
-            </Container>
-        )
-
     }
 }
 

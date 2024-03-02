@@ -2,12 +2,14 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useEffect, useState } from 'react';
-import { Button, Container, Divider, IconButton, InputBase, Stack, Typography, useTheme } from '@mui/material';
+import { Button, Container, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material';
 import { StyledBadge } from '../searchBar/muiSearchBarStyle';
 import { useTranslation } from "react-i18next";
-import { Close, Delete } from '@mui/icons-material';
+import { Close } from '@mui/icons-material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import CartItem from './CartItem';
+import { RootState } from '@/state/store';
+import { useSelector } from 'react-redux';
 
 type Anchor = 'left' | 'right';
 
@@ -38,11 +40,29 @@ function Cart() {
     useEffect(() => {
         i18n.language == "ar" ? setAnchor('left') : setAnchor('right');
     }, [i18n.language])
+
     const [isHovered, setIsHovered] = useState(false);
+
+    const cartProducts = useSelector((state: RootState) => state.cart);
+
+    const calcPrice = () => {
+        let totalPrice = 0;
+        let index = 0;
+
+        cartProducts.cartItems.forEach(item => {
+            totalPrice += (item.attributes.productPrice * cartProducts.cartCount[index]);
+            cartProducts.cartCount[index];
+            index++;
+
+        });
+
+        return (totalPrice).toFixed(2);
+    }
+
     return (
         <Container>
             <IconButton aria-label="cart" onClick={toggleDrawer(anchor, true)}>
-                <StyledBadge badgeContent={4} color="primary" sx={{ ".MuiBadge-badge": { backgroundColor: "#d23f57" } }}>
+                <StyledBadge badgeContent={cartProducts.cartCount.length} color="primary" sx={{ ".MuiBadge-badge": { backgroundColor: "#d23f57" } }}>
                     <ShoppingCartIcon />
                 </StyledBadge>
             </IconButton>
@@ -76,6 +96,7 @@ function Cart() {
                         }}
                         size='small'
                         onClick={toggleDrawer(anchor, false)}
+                        onKeyDown={toggleDrawer(anchor, false)}
                     >
                         <Close />
                     </IconButton>
@@ -85,7 +106,7 @@ function Cart() {
 
                 <CartItem />
 
-                <Button
+                {/* <Button
                     sx={{
                         backgroundColor: "rgba(233, 69, 96, 0.75)",
                         "&:hover": { backgroundColor: "#9D4352" },
@@ -102,11 +123,10 @@ function Cart() {
                     }}
                     variant="contained"
                     startIcon={<Delete fontSize="small" sx={{}} />}
-                />
+                /> */}
 
                 <Divider sx={{ my: 3.25 }} />
 
-                {/* <Divider sx={{width: "80%", marginInline: 'auto'}}/> */}
                 <Button
                     sx={{
                         display: "flex",
@@ -114,17 +134,16 @@ function Cart() {
                         alignItems: "center",
                         justifyContent: "center",
                         gap: 1,
-                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-                        border: theme.palette.mode === 'dark' ? "1px solid #434D5B" : "1px solid #DAE2ED",
                         textTransform: "capitalize",
                         padding: theme.spacing(3),
-                        color: "#d23f57",
-                        backgroundColor: "initial",
-                        "&:hover": { backgroundColor: "initial" },
+                        // @ts-ignore
+                        color: theme.palette.bg.main,
+                        backgroundColor: "#D23F57", "&:hover": { backgroundColor: "#9D4352" },
                         width: "60%",
                         marginInline: 'auto',
                         position: "relative"
                     }}
+                    variant="contained"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
@@ -142,19 +161,19 @@ function Cart() {
                     >
                         <Typography
                             variant="h6"
-                            sx={{
-                                color: theme.palette.text.primary,
-                            }}
+                        // sx={{
+                        //     color: theme.palette.text.primary,
+                        // }}
                         >
                             {t("Subtotal")} :
                         </Typography>
                         <Typography
                             variant="h6"
-                            sx={{
-                                color: "#d23f57",
-                            }}
+                        // sx={{
+                        //     color: "#d23f57",
+                        // }}
                         >
-                            $90
+                            ${calcPrice()}
                         </Typography>
                     </Stack>
                     <Stack
@@ -168,18 +187,17 @@ function Cart() {
                             transition: "opacity 0.3s",
                         }}
                     >
-                        <ShoppingCartCheckoutIcon sx={{ color: "#d23f57" }} />
+                        <ShoppingCartCheckoutIcon />
                         <Typography
                             variant="h6"
-                            sx={{
-                                color: theme.palette.text.primary,
-                            }}
+                        // sx={{
+                        //     color: theme.palette.text.primary,
+                        // }}
                         >
                             {t("Check out")}
                         </Typography>
                     </Stack>
                 </Button>
-                {/* <Divider sx={{width: "80%", marginInline: 'auto'}}/> */}
 
             </Drawer>
 

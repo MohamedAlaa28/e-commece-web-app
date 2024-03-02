@@ -1,13 +1,22 @@
 import { AddShoppingCartOutlined } from "@mui/icons-material";
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
+import { Box, Button, Stack, ToggleButton, ToggleButtonGroup, Typography, useTheme } from "@mui/material"
 import Image from "next/image";
-import { ProductDetailsProps } from "./types";
+import { Product } from "../../types";
 import { useState } from "react";
+import { AppDispatch } from "@/state/store";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/state/cartSlice";
 
-function ProductDetails({ selectedProduct }: ProductDetailsProps) {
+interface Props {
+    selectedProduct: Product;
+    handleClose: () => void;
+}
+function ProductDetails({ selectedProduct, handleClose }: Props) {
     const theme = useTheme();
 
     const [selectedImage, setSelectedImage] = useState(0);
+
+    const dispatch = useDispatch<AppDispatch>();
 
     return (
         <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
@@ -74,8 +83,17 @@ function ProductDetails({ selectedProduct }: ProductDetailsProps) {
                 </Stack>
 
                 <Button
-                    sx={{ mb: { xs: 1, sm: 0 }, textTransform: "capitalize", backgroundColor: "#D23F57", "&:hover": { backgroundColor: "#9D4352" } }}
+                    sx={{
+                        mb: { xs: 1, sm: 0 },
+                        textTransform: "capitalize",
+                        backgroundColor: "#D23F57",
+                        "&:hover": { backgroundColor: "#9D4352" }
+                    }}
                     variant="contained"
+                    onClick={() => {
+                        dispatch(addToCart({ item: selectedProduct, image: selectedImage }))
+                        handleClose()
+                    }}
                 >
                     <AddShoppingCartOutlined sx={{ mr: 1 }} fontSize="small" />
                     Buy now

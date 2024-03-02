@@ -111,11 +111,6 @@ function SearchBar() {
       </Search>
 
       <Stack direction={"row"} alignItems={"center"}>
-        {/* <IconButton aria-label="cart">
-          <StyledBadge badgeContent={4} color="primary">
-            <ShoppingCartIcon />
-          </StyledBadge>
-        </IconButton> */}
         <Cart />
 
         <IconButton>
