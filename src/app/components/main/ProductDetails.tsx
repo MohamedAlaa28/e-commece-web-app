@@ -10,9 +10,10 @@ function ProductDetails({ selectedProduct }: ProductDetailsProps) {
     const [selectedImage, setSelectedImage] = useState(0);
 
     return (
-        <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }} bgcolor={
-            // @ts-ignore
-            theme.palette.bg.main}>
+        <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
+            bgcolor={
+                // @ts-ignore
+                theme.palette.bg.main}>
             <Box sx={{ display: "flex" }}>
                 <Image src={selectedProduct.attributes.productImage.data[selectedImage].attributes.url} alt="product" width={325} height={400}
                     style={{

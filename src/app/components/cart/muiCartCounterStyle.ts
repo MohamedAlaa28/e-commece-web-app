@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-const crimson = {
+export const crimson = {
   "100": "rgb(255, 94, 130)",
   "200": "rgb(255, 88, 121)",
   "300": "rgb(255, 81, 113)",
@@ -45,8 +45,7 @@ export const StyledInput = styled('input')(
     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
     background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
     border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-    box-shadow: 0px 2px 4px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.5)' : 'rgba(0,0,0, 0.05)'
-    };
+    cursor: context-menu;
     border-radius: 3px;
     margin: 0 5px;
     padding: 5px 3px;
@@ -54,18 +53,6 @@ export const StyledInput = styled('input')(
     min-width: 0;
     width: 2rem;
     text-align: center;
-
-    &:hover {
-      border-color: ${crimson[400]};
-    }
-
-    &:focus {
-      border-color: ${crimson[400]};
-    }
-
-    &:focus-visible {
-      outline: 0;
-    }
   `,
 );
 

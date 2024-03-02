@@ -5,7 +5,7 @@ import { ExpandMore, StoreSharp } from "@mui/icons-material";
 import { StyledInputBase, SearchIconWrapper, Search } from "./muiSearchBarStyle";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Cart from "./Cart";
+import Cart from "../cart/Cart";
 
 function SearchBar() {
   const theme = useTheme();
