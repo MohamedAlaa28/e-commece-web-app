@@ -141,11 +141,12 @@ function Cart() {
                         backgroundColor: "#D23F57", "&:hover": { backgroundColor: "#9D4352" },
                         width: "60%",
                         marginInline: 'auto',
-                        position: "relative"
+                        position: "relative",
                     }}
                     variant="contained"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
+                    disabled={cartProducts.cartCount.length == 0}
                 >
                     <Stack
                         flexDirection="row"
