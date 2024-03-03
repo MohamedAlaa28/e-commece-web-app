@@ -22,12 +22,7 @@ function CartItem() {
     const dispatch = useDispatch<AppDispatch>();
 
     return (
-        <Box
-            sx={{
-                width: { xs: "100%", md: 375 },
-            }}
-            role="presentation"
-        >
+        <Box role="presentation">
             <List>
                 {cartProducts.cartItems?.map((item: Product, index) => (
                     <ListItem key={index} disablePadding>

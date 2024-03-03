@@ -17,10 +17,6 @@ function Cart() {
     const theme = useTheme();
     const { t, i18n } = useTranslation();
 
-    // const [state, setState] = useState({
-    //     left: false,
-    //     right: false,
-    // });
     const dispatch = useDispatch<AppDispatch>();
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -77,7 +73,8 @@ function Cart() {
                         borderTopLeftRadius: i18n.language === "ar" ? 0 : 8,
                         borderBottomRightRadius: i18n.language === "ar" ? 8 : 0,
                         borderTopRightRadius: i18n.language === "ar" ? 8 : 0,
-                        direction: i18n.language == "ar" ? "rtl" : "ltr"
+                        direction: i18n.language == "ar" ? "rtl" : "ltr",
+                        width: { xs: "100%", md: 375 },
                     },
                 }}
             >
@@ -152,7 +149,6 @@ function Cart() {
                         justifyContent="center"
                         gap={1}
                         sx={{
-                            // width: "fit-content",
                             position: "absolute",
                             opacity: isHovered ? 0 : 1,
                             transition: "opacity 0.3s",
@@ -160,17 +156,11 @@ function Cart() {
                     >
                         <Typography
                             variant="h6"
-                        // sx={{
-                        //     color: theme.palette.text.primary,
-                        // }}
                         >
                             {t("Subtotal")} :
                         </Typography>
                         <Typography
                             variant="h6"
-                        // sx={{
-                        //     color: "#d23f57",
-                        // }}
                         >
                             ${calcPrice()}
                         </Typography>
@@ -189,9 +179,6 @@ function Cart() {
                         <ShoppingCartCheckoutIcon />
                         <Typography
                             variant="h6"
-                        // sx={{
-                        //     color: theme.palette.text.primary,
-                        // }}
                         >
                             {t("Check out")}
                         </Typography>

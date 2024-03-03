@@ -6,7 +6,7 @@ export const Search = styled("div")(({ theme }) => ({
   display: "flex",
   borderRadius: "22px",
   justifyContent: "space-between",
-  flexGrow: 0.4,
+  // flexGrow: 0.4,
   position: "relative",
   border: "1px solid #777",
   "&:hover": {
@@ -41,7 +41,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: "100%",
     placeholder: "Search…",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "30ch",
     },
   },
   ".ar & .MuiInputBase-input": {
