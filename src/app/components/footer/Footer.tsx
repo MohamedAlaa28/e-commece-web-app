@@ -16,7 +16,7 @@ function Footer() {
                 justifyContent={"center"}
                 display={"flex"}
                 alignItems={"center"}
-                color={"White"}
+                color={"#fff"}
                 variant="h6"
                 sx={{ fontSize: 18 }}
             >
