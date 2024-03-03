@@ -5,7 +5,7 @@ import { Product } from "../../types";
 import { useState } from "react";
 import { AppDispatch, RootState } from "@/state/store";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, cartToggle } from "@/state/cartSlice";
+import { addToCart, cartToggle, countChange } from "@/state/cartSlice";
 
 interface Props {
     selectedProduct: Product;
@@ -89,13 +89,13 @@ function ProductDetails({ selectedProduct, handleClose }: Props) {
                         mb: { xs: 1, sm: 0 },
                         textTransform: "capitalize",
                         backgroundColor: "#D23F57",
-                        "&:hover": { backgroundColor: "#9D4352" }
+                        "&:hover": { backgroundColor: "#9D4352" },
                     }}
                     variant="contained"
                     onClick={() => {
-                        dispatch(addToCart({ item: selectedProduct, image: selectedImage }));
+                        dispatch(addToCart({ item: selectedProduct, imageIndex: selectedImage }));
                         handleClose();
-                        dispatch(cartToggle(true)); // Open the cart drawer
+                        dispatch(cartToggle(true));
                     }}
                 >
                     <AddShoppingCartOutlined sx={{ mr: 1 }} fontSize="small" />

@@ -1,11 +1,12 @@
-import { Container, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useMediaQuery, useTheme } from "@mui/material"
+import { Avatar, Box, Button, Container, Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import { ExpandMore, StoreSharp } from "@mui/icons-material";
+import { ExpandMore, Logout, PersonAdd, Settings, StoreSharp } from "@mui/icons-material";
 import { StyledInputBase, SearchIconWrapper, Search } from "./muiSearchBarStyle";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Cart from "../cart/Cart";
+import UserMenu from "./UserMenu";
 
 function SearchBar() {
   const theme = useTheme();
@@ -33,12 +34,21 @@ function SearchBar() {
   const options = ["All Categories", "CAR", "Clothes", "Electronics"];
 
   return (
-    <Container sx={{ my: 3, display: "flex", justifyContent: "space-between", gap: 2.5 }}>
+    <Container sx={{ my: 3, display: "flex", justifyContent: "space-between", gap: 1 }}>
       {desktop &&
-        <Stack alignItems={"center"} direction={"row"} gap={1}>
-          <StoreSharp fontSize="medium" sx={{ width: 30, height: 30 }} />
+        <Button sx={{
+          display: "flex", alignItems: "center", gap: 1,
+          color: theme.palette.text.primary, textTransform: "capitalize", padding: 0,
+          "&:hover": {
+            bgcolor: theme.palette.mode == "light"
+              ? "#ffffff"
+              : "#262626"
+          }
+        }}>
+          <StoreSharp fontSize="large" sx={{ width: 32, height: 32 }} />
           <Typography variant="h6" fontWeight={500}>Mercado</Typography>
-        </Stack>
+        </Button>
+
       }
 
       <Search>
@@ -110,13 +120,19 @@ function SearchBar() {
         </div>
       </Search>
 
-      <Stack direction={"row"} alignItems={"center"}>
+      <Stack direction={"row"} alignItems={"center"} gap={1}>
         <Cart />
 
-        <IconButton>
-          <Person2OutlinedIcon />
-        </IconButton>
+        {/* {desktop &&
+          <IconButton>
+            <Person2OutlinedIcon />
+          </IconButton>
+        } */}
+
+        <UserMenu />
       </Stack>
+
+
     </Container>
   )
 }

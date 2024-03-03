@@ -44,10 +44,8 @@ function Cart() {
         let index = 0;
 
         cartProducts.cartItems.forEach(item => {
-            totalPrice += (item.attributes.productPrice * cartProducts.cartCount[index]);
-            cartProducts.cartCount[index];
+            totalPrice += (item.item.attributes.productPrice * item.count);
             index++;
-
         });
 
         return (totalPrice).toFixed(2);
@@ -56,7 +54,7 @@ function Cart() {
     return (
         <Stack>
             <IconButton aria-label="cart" onClick={toggleDrawer(true)}>
-                <StyledBadge badgeContent={cartProducts.cartCount.length} color="primary" sx={{ padding: 0, ".MuiBadge-badge": { backgroundColor: "#d23f57" } }}>
+                <StyledBadge badgeContent={cartProducts.cartItems.length} color="primary" sx={{ padding: 0, ".MuiBadge-badge": { backgroundColor: "#d23f57" } }}>
                     <ShoppingCartIcon sx={{ padding: 0 }} />
                 </StyledBadge>
             </IconButton>
@@ -101,25 +99,6 @@ function Cart() {
 
                 <CartItem />
 
-                {/* <Button
-                    sx={{
-                        backgroundColor: "rgba(233, 69, 96, 0.75)",
-                        "&:hover": { backgroundColor: "#9D4352" },
-                        minWidth: "30px",
-                        width: "30px",
-                        height: "30px",
-                        padding: 0,
-                        textAlign: "center",
-                        marginRight: i18n.language == "ar" ? "auto" : 4,
-                        marginLeft: i18n.language == "ar" ? 4 : "auto",
-                        "& .MuiButton-startIcon": {
-                            margin: 0,
-                        },
-                    }}
-                    variant="contained"
-                    startIcon={<Delete fontSize="small" sx={{}} />}
-                /> */}
-
                 <Divider sx={{ my: 3.25 }} />
 
                 <Button
@@ -141,7 +120,7 @@ function Cart() {
                     variant="contained"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    disabled={cartProducts.cartCount.length == 0}
+                    disabled={cartProducts.cartItems.length == 0}
                 >
                     <Stack
                         flexDirection="row"

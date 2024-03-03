@@ -32,12 +32,15 @@ export interface AppState {
     products: ProductsState;
 }
 export interface CartState {
-    cartItems: Product[];
-    cartCount: number[];
-    cartImage: number[];
+    cartItems: CartItem[];
     cartState: boolean;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
+}
+export interface CartItem {
+    item: Product;
+    imageIndex: number;
+    count: number;
 }
 
 export type Anchor = 'left' | 'right';

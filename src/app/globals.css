@@ -27,3 +27,7 @@ html .ar {
 ::-webkit-scrollbar-thumb:hover {
   background: #888;
 }
+
+.profile-avatar {
+  margin: 0 !important;
+}

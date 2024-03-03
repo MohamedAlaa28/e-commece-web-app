@@ -41,7 +41,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: "100%",
     placeholder: "Search…",
     [theme.breakpoints.up("md")]: {
-      width: "30ch",
+      width: "40ch",
     },
   },
   ".ar & .MuiInputBase-input": {
