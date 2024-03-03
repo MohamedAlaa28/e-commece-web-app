@@ -68,7 +68,7 @@ function Cart() {
                 sx={{
                     "& .MuiPaper-root": {
                         // @ts-ignore
-                        backgroundColor: theme.palette.bg.main,
+                        bgcolor: theme.palette.mode === "dark" ? "#000" : "#fff",
                         borderBottomLeftRadius: i18n.language === "ar" ? 0 : 8,
                         borderTopLeftRadius: i18n.language === "ar" ? 0 : 8,
                         borderBottomRightRadius: i18n.language === "ar" ? 8 : 0,

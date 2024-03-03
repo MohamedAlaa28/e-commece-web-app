@@ -31,13 +31,13 @@ function CartItem() {
                             textAlign: i18n.language == "ar" ? "right" : "left",
                             cursor: "context-menu",
                             "&:hover": {
-                                backgroundColor:
+                                bgcolor:
                                     // @ts-ignore
-                                    index % 2 == 0 ? theme.palette.favColor.main : theme.palette.mode == 'light' ? theme.palette.bg.main : "#3f4142",
+                                    index % 2 == 0 ? theme.palette.favColor.main : theme.palette.mode == 'light' ? "#ffffff" : "#262626",
                             },
-                            backgroundColor:
+                            bgcolor:
                                 // @ts-ignore
-                                index % 2 == 0 ? theme.palette.favColor.main : theme.palette.mode == 'light' ? theme.palette.bg.main : "#3f4142",
+                                index % 2 == 0 ? theme.palette.favColor.main : theme.palette.mode == 'light' ? "#ffffff" : "#262626",
                         }} >
                             <ListItemIcon>
                                 <Box sx={{ display: "flex" }}>
