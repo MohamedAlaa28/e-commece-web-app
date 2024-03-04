@@ -1,12 +1,15 @@
-import { Avatar, Box, Button, Container, Divider, IconButton, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, Stack, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material"
+import { Button, Container, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useMediaQuery, useTheme } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search";
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import { ExpandMore, Logout, PersonAdd, Settings, StoreSharp } from "@mui/icons-material";
-import { StyledInputBase, SearchIconWrapper, Search } from "./muiSearchBarStyle";
+import { ExpandMore, StoreSharp } from "@mui/icons-material";
+import { SearchIconWrapper, Search } from "./muiSearchBarStyle";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Cart from "../cart/Cart";
 import UserMenu from "./UserMenu";
+import { SearchMenu } from "./SearchMenu";
+
+
+const options = ["All Categories", "CAR", "Clothes", "Electronics"];
 
 function SearchBar() {
   const theme = useTheme();
@@ -31,7 +34,8 @@ function SearchBar() {
     setAnchorEl(null);
   };
 
-  const options = ["All Categories", "CAR", "Clothes", "Electronics"];
+
+
 
   return (
     <Container sx={{ my: 3, display: "flex", justifyContent: "space-between", gap: 1 }}>
@@ -55,69 +59,66 @@ function SearchBar() {
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
-        <StyledInputBase
-          inputProps={{ "aria-label": "search" }}
-        />
 
-        <div>
-          <List
-            component="nav"
-            aria-label="Device settings"
-            sx={{
-              // @ts-ignore
-              bgcolor: theme.palette.header.main,
-              borderBottomRightRadius: i18n.language == "ar" ? 0 : 22,
-              borderTopRightRadius: i18n.language == "ar" ? 0 : 22,
-              borderBottomLeftRadius: i18n.language == "ar" ? 22 : 0,
-              borderTopLeftRadius: i18n.language == "ar" ? 22 : 0,
-              p: "0",
-            }}
+        <SearchMenu />
+
+        <List
+          component="nav"
+          aria-label="Device settings"
+          sx={{
+            // @ts-ignore
+            bgcolor: theme.palette.header.main,
+            borderBottomRightRadius: i18n.language == "ar" ? 0 : 22,
+            borderTopRightRadius: i18n.language == "ar" ? 0 : 22,
+            borderBottomLeftRadius: i18n.language == "ar" ? 22 : 0,
+            borderTopLeftRadius: i18n.language == "ar" ? 22 : 0,
+            p: "0",
+          }}
+        >
+          <ListItem
+            id="lock-button"
+            aria-haspopup="listbox"
+            aria-controls="lock-menu"
+            aria-label="when device is locked"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClickListItem}
           >
-            <ListItem
-              id="lock-button"
-              aria-haspopup="listbox"
-              aria-controls="lock-menu"
-              aria-label="when device is locked"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClickListItem}
+            <ListItemText
+              // className="border"
+              sx={{
+                minWidth: 93,
+                textAlign: "center",
+                "&:hover": { cursor: "pointer" },
+              }}
+              secondary={t(options[selectedIndex])}
+            />
+            <ExpandMore sx={{ fontSize: "16px" }} />
+          </ListItem>
+        </List>
+
+        <Menu
+          id="lock-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "lock-button",
+            role: "listbox",
+          }}
+          sx={{ ml: i18n.language === "ar" ? 1.25 : undefined }}
+        >
+          {options.map((option, index) => (
+            <MenuItem
+              sx={{ fontSize: "13px", direction: i18n.language === "ar" ? "rtl" : "ltr", minWidth: 130 }}
+              key={option}
+              selected={index === selectedIndex}
+              onClick={(event) => handleMenuItemClick(event, index)}
             >
-              <ListItemText
-                // className="border"
-                sx={{
-                  minWidth: 93,
-                  textAlign: "center",
-                  "&:hover": { cursor: "pointer" },
-                }}
-                secondary={t(options[selectedIndex])}
-              />
-              <ExpandMore sx={{ fontSize: "16px" }} />
-            </ListItem>
-          </List>
+              {t(option)}
+            </MenuItem>
+          ))}
+        </Menu>
 
-          <Menu
-            id="lock-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "lock-button",
-              role: "listbox",
-            }}
-            sx={{ ml: i18n.language === "ar" ? 1.25 : undefined }}
-          >
-            {options.map((option, index) => (
-              <MenuItem
-                sx={{ fontSize: "13px", direction: i18n.language === "ar" ? "rtl" : "ltr", minWidth: 130 }}
-                key={option}
-                selected={index === selectedIndex}
-                onClick={(event) => handleMenuItemClick(event, index)}
-              >
-                {t(option)}
-              </MenuItem>
-            ))}
-          </Menu>
-
-        </div>
       </Search>
 
       <Stack direction={"row"} alignItems={"center"} gap={1}>

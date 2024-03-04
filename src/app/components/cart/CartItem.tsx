@@ -9,9 +9,10 @@ import Image from "next/image";
 import { StyledButton, StyledInput, StyledInputRoot } from "./muiCartCounterStyle";
 import { Box, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { AppDispatch, RootState } from "@/state/store";
 import { useDispatch, useSelector } from "react-redux";
-import { cartRemoveItem, countChange } from "@/state/cartSlice";
+import { AppDispatch, RootState } from "state/store";
+import { countChange } from "state/cartSlice";
+import { CartItem } from "app/types";
 
 function CartItem() {
     const theme = useTheme();
@@ -24,7 +25,7 @@ function CartItem() {
     return (
         <Box role="presentation">
             <List>
-                {cartProducts.cartItems?.map((cartItem, index) => (
+                {cartProducts.cartItems?.map((cartItem: CartItem, index: number) => (
                     <ListItem key={index} disablePadding>
                         <ListItemButton
                             disableRipple

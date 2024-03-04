@@ -3,9 +3,9 @@ import { Box, Button, Stack, ToggleButton, ToggleButtonGroup, Typography, useThe
 import Image from "next/image";
 import { Product } from "../../types";
 import { useState } from "react";
-import { AppDispatch, RootState } from "@/state/store";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, cartToggle, countChange } from "@/state/cartSlice";
+import { AppDispatch, RootState } from "state/store";
+import { addToCart, cartToggle } from "state/cartSlice";
 
 interface Props {
     selectedProduct: Product;

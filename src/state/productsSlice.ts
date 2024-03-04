@@ -1,5 +1,5 @@
-import { Product } from "@/app/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Product } from "app/types";
 import axios from "axios"
 
 
@@ -19,10 +19,18 @@ const productsSlice = createSlice({
     allProducts: [],
     menProducts: [],
     womenProducts: [],
+    searchedProducts: [],
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    searchFor(state, action) {
+      const searchTerm = action.payload.toLowerCase();
+      state.searchedProducts = state.allProducts.filter((product: Product) =>
+        product.attributes.productTitle.toLowerCase().includes(searchTerm)
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProducts.pending, (state) => {
@@ -38,3 +46,4 @@ const productsSlice = createSlice({
 });
 
 export default productsSlice.reducer;
+export const { searchFor } = productsSlice.actions;

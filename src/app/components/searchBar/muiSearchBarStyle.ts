@@ -6,7 +6,6 @@ export const Search = styled("div")(({ theme }) => ({
   display: "flex",
   borderRadius: "22px",
   justifyContent: "space-between",
-  // flexGrow: 0.4,
   position: "relative",
   border: "1px solid #777",
   "&:hover": {
@@ -34,6 +33,8 @@ export const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
+  display: 'flex',
+  alignItems: 'center',
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,

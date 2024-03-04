@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Box, Container, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useTheme } from "@mui/material";
 import { DarkModeOutlined, ExpandMore, LightModeOutlined } from "@mui/icons-material";
 import TwitterIcon from "@mui/icons-material/Twitter";

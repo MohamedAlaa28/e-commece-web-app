@@ -24,6 +24,7 @@ export interface ProductsState {
     allProducts: Product[];
     menProducts: Product[];
     womenProducts: Product[];
+    searchedProducts: Product[];
     category: string[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;

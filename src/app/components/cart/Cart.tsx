@@ -2,16 +2,16 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useEffect, useState } from 'react';
-import { Button, Container, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material';
+import { Button, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material';
 import { StyledBadge } from '../searchBar/muiSearchBarStyle';
 import { useTranslation } from "react-i18next";
 import { Close } from '@mui/icons-material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import CartItem from './CartItem';
-import { AppDispatch, RootState } from '@/state/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { Anchor } from '@/app/types';
-import { cartToggle } from '@/state/cartSlice';
+import { AppDispatch, RootState } from 'state/store';
+import { cartToggle } from 'state/cartSlice';
+import { Anchor } from 'app/types';
 
 function Cart() {
     const theme = useTheme();

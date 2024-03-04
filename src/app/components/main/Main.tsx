@@ -11,7 +11,7 @@ import { Product } from "../../types";
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/state/store";
+import { AppDispatch, RootState } from "state/store";
 
 
 function Main() {
@@ -216,7 +216,7 @@ function Main() {
                             <Close />
                         </IconButton>
 
-                        {selectedProduct && <ProductDetails selectedProduct={selectedProduct} handleClose ={handleClose}/>}
+                        {selectedProduct && <ProductDetails selectedProduct={selectedProduct} handleClose={handleClose} />}
                     </Dialog>
 
                 </Stack>
