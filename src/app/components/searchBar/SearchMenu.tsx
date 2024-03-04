@@ -10,6 +10,7 @@ import { AppDispatch } from 'state/store';
 export const SearchMenu = () => {
   const theme = useTheme();
   const [input, setInput] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
 
   const searchedProducts = useSelector((state: AppState) => state.products.searchedProducts);
@@ -20,7 +21,16 @@ export const SearchMenu = () => {
     dispatch(searchFor(value));
   };
 
-  const showResults = searchedProducts.length > 0 && input.length > 0;
+  const handleFocus = () => setIsFocused(true);
+
+  const handleBlur = () => {
+    // Delay hiding the menu to allow time for click event processing
+    setTimeout(() => {
+      setIsFocused(false);
+    }, 200);
+  };
+
+  const showResults = searchedProducts.length > 0 && input.length > 0 && isFocused;
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', width: '100%' }} className="search-bar-container">
@@ -29,6 +39,8 @@ export const SearchMenu = () => {
         inputProps={{ "aria-label": "search" }}
         value={input}
         onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
       <Grow in={showResults}>
         <Paper sx={{
@@ -44,8 +56,8 @@ export const SearchMenu = () => {
           {searchedProducts.map((result, index) => (
             <ListItem key={index}
               onClick={() => {
-                // alert(`You selected ${result.attributes.productTitle}!`);
                 setInput("");
+                setIsFocused(false);
               }}
               sx={{
                 cursor: "pointer",
