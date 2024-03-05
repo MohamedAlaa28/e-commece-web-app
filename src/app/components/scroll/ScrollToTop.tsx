@@ -2,8 +2,6 @@ import { KeyboardArrowUp } from "@mui/icons-material"
 import { Fab, Zoom, useScrollTrigger } from "@mui/material"
 
 function ScrollToTop() {
-    // const scroll = useScrollTrigger(false);
-    // const handleClick
     return (
         <Zoom in={useScrollTrigger({ threshold: 100 })}>
             <Fab sx={{ position: "fixed", bottom: 33, right: 33, backgroundColor: "#d23f57","&:hover":{backgroundColor: "#9D4352"} }}

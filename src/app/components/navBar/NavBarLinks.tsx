@@ -2,6 +2,7 @@ import { ExpandMore, KeyboardArrowRightOutlined } from "@mui/icons-material";
 import { Box, List, ListItem, ListItemButton, ListItemText, Paper, Stack, Typography } from "@mui/material";
 import { HomeItems, pagesItems, userAccountItems, vendorAccountItems } from "./NavBarDataLinks";
 import { useTranslation } from "react-i18next";
+import i18n from "i18n";
 
 const navItems = [
     { title: "Home", data: HomeItems },
@@ -11,7 +12,7 @@ const navItems = [
 ];
 
 function NavBarLinks() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <Stack direction={"row"} gap={4} alignItems={"center"}>
@@ -53,17 +54,17 @@ function NavBarLinks() {
                                             disablePadding
                                         >
                                             <ListItemButton sx={{ display: "flex", p: 0, px: 1.5 }}>
-                                                <ListItemText sx={{ ".MuiTypography-root": { fontSize: "15px", fontWeight: 300, textAlign: i18n.language === "ar" ? "right" : "left" } }} primary={t(item.title)} />
-                                                {item.subLinks.length > 0 && <KeyboardArrowRightOutlined fontSize="small" sx={{ rotate: i18n.language === "ar" ? "180deg" : "0deg" }} />}
+                                                <ListItemText sx={{ ".MuiTypography-root": { fontSize: "15px", fontWeight: 300, textAlign: i18n.resolvedLanguage === "ar" ? "right" : "left" } }} primary={t(item.title)} />
+                                                {item.subLinks.length > 0 && <KeyboardArrowRightOutlined fontSize="small" sx={{ rotate: i18n.resolvedLanguage === "ar" ? "180deg" : "0deg" }} />}
                                             </ListItemButton>
                                             {item.subLinks.length > 0 && (
-                                                <Box className="sub-link" sx={{ display: "none", position: "absolute", top: 0, right: i18n.language === "ar" ? "100%" : undefined, left: i18n.language !== "ar" ? "100%" : undefined }}>
-                                                    <Paper sx={{ ml: i18n.language !== "ar" ? 1 : 0, mr: i18n.language !== "ar" ? 0 : 1, minWidth: (item.title === "Shop" && i18n.language !== "ar") ? 166 : 150 }}>
+                                                <Box className="sub-link" sx={{ display: "none", position: "absolute", top: 0, right: i18n.resolvedLanguage === "ar" ? "100%" : undefined, left: i18n.resolvedLanguage !== "ar" ? "100%" : undefined }}>
+                                                    <Paper sx={{ ml: i18n.resolvedLanguage !== "ar" ? 1 : 0, mr: i18n.resolvedLanguage !== "ar" ? 0 : 1, minWidth: (item.title === "Shop" && i18n.resolvedLanguage !== "ar") ? 166 : 150 }}>
                                                         <List>
                                                             {item.subLinks.map((subLink) => (
                                                                 <ListItem key={subLink.id} disablePadding>
                                                                     <ListItemButton sx={{ display: "flex", p: 0, px: 1.5 }}>
-                                                                        <ListItemText sx={{ ".MuiTypography-root": { fontSize: "15px", fontWeight: 300, textAlign: i18n.language === "ar" ? "right" : "left" } }} primary={t(subLink.title)} />
+                                                                        <ListItemText sx={{ ".MuiTypography-root": { fontSize: "15px", fontWeight: 300, textAlign: i18n.resolvedLanguage === "ar" ? "right" : "left" } }} primary={t(subLink.title)} />
                                                                     </ListItemButton>
                                                                 </ListItem>
                                                             ))}

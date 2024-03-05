@@ -27,16 +27,15 @@ i18n
     .init({
         resources,
         detection: {
-            order: ["localStorage", "htmlTag"],
-            caches: ["localStorage"],
+            order: ["localStorage", "htmlTag"], // Specify detection order
+            caches: ["localStorage"], // Specify where to cache the language
         },
-
+        fallbackLng: "en", // Specify a fallback language
         interpolation: {
-            escapeValue: false, // react already safes from xss
+            escapeValue: false, // Not needed for React as it escapes by default
         },
-
         react: {
-            useSuspense: false,
+            useSuspense: false, // Disable suspense to avoid errors related to async rendering
         },
     });
 

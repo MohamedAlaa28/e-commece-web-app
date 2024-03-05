@@ -27,7 +27,7 @@ function CircularProgressWithLabel() {
                 justifyContent: 'center',
             }}
         >
-            <CircularProgress variant="determinate" value={progress} />
+            <CircularProgress variant="determinate" value={progress} sx={{ color: "#d23f57", }} />
             <Box
                 sx={{
                     top: 0,

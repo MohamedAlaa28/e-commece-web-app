@@ -1,9 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartState, Product } from 'app/types';
 
+const loadCartItems = () => {
+    try {
+        const serializedCartItems = localStorage.getItem('cartItems');
+        return serializedCartItems ? JSON.parse(serializedCartItems) : [];
+    } catch (err) {
+        return [];
+    }
+};
+
 
 const initialState: CartState = {
-    cartItems: [],
+    cartItems: loadCartItems(),
     cartState: false,
     status: 'idle',
     error: null,

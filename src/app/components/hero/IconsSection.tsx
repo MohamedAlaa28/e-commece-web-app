@@ -5,10 +5,11 @@ import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOu
 import AccessAlarmOutlinedIcon from "@mui/icons-material/AccessAlarmOutlined";
 import { useTheme } from "@emotion/react";
 import { useTranslation } from "react-i18next";
+import i18n from "i18n";
 
 const IconsSection = () => {
     const theme = useTheme();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const desktop = useMediaQuery("(min-width:600px)");
 
@@ -42,7 +43,7 @@ const IconsSection = () => {
                         flexGrow: 1,
                         gap: 3,
                         alignItems: "center",
-                        justifyContent: desktop ? "center" : i18n.language == "ar" ? " right" : "left",
+                        justifyContent: desktop ? "center" : i18n.resolvedLanguage == "ar" ? " right" : "left",
                     }}>
                         {item.icon}
                         <Box>

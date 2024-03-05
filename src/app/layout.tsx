@@ -1,4 +1,5 @@
 "use client"
+import React, { useState, useEffect } from 'react';
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Provider } from "react-redux";
@@ -10,21 +11,42 @@ import Header from "./components/header/Header";
 import SearchBar from "./components/searchBar/SearchBar";
 import NavBar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";
-import { useTranslation } from "react-i18next";
+import i18n from "i18n";
+import CircularProgressWithLabel from './components/main/Loading';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const [theme, colorMode] = useMode();
-  const { i18n } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.resolvedLanguage);
+
+  useEffect(() => {
+    const languageChangeHandler = () => {
+      setCurrentLanguage(i18n.resolvedLanguage);
+    };
+
+    // Listen for language changes
+    i18n.on('languageChanged', languageChangeHandler);
+
+    // Cleanup listener on component unmount
+    return () => {
+      i18n.off('languageChanged', languageChangeHandler);
+    };
+  }, []);
+
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   return (
     <Provider store={store}>
-      <html lang="en">
+      <html>
 
         <head>
           <meta charSet="UTF-8" />
-          <meta name="keywords" content="HTML, CSS, JavaScript, React.js, React, Next.js, Next, CSS, Material Ui, PostgreSQL, Frontend, Front-end ,fullstack ,full-stack" />
+          <meta name="keywords" content="HTML, CSS, JavaScript, React.js, React, Next.js, Next, CSS, Material Ui, PostgreSQL, Frontend, Front-end, fullstack, full-stack" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="author" content="Mohamed Alaa" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,18 +55,21 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         </head>
 
         <body className={inter.className} suppressHydrationWarning={true}>
-          <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <main className={i18n.language === 'ar' ? 'ar' : 'en'}>
-                <Header />
-                <SearchBar />
-                <NavBar />
-                {children}
-                <Footer />
-              </main>
-            </ThemeProvider>
-          </ColorModeContext.Provider>
+          {isClient ?
+            <ColorModeContext.Provider value={colorMode}>
+              <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <main className={currentLanguage === 'ar' ? 'ar' : 'en'}>
+                  <Header />
+                  <SearchBar />
+                  <NavBar />
+                  {children}
+                  <Footer />
+                </main>
+              </ThemeProvider>
+            </ColorModeContext.Provider>
+            :
+            <CircularProgressWithLabel />}
         </body>
 
       </html>

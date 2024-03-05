@@ -3,8 +3,8 @@ import { Box, Button, Stack, ToggleButton, ToggleButtonGroup, Typography, useThe
 import Image from "next/image";
 import { Product } from "../../types";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "state/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "state/store";
 import { addToCart, cartToggle } from "state/cartSlice";
 
 interface Props {
@@ -17,8 +17,6 @@ function ProductDetails({ selectedProduct, handleClose }: Props) {
     const [selectedImage, setSelectedImage] = useState(0);
 
     const dispatch = useDispatch<AppDispatch>();
-
-    const cartProducts = useSelector((state: RootState) => state.cart);
 
     return (
         <Box display="flex" alignItems="center" sx={{ flexDirection: { xs: 'column', sm: 'row' } }}

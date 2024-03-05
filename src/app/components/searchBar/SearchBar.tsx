@@ -7,13 +7,13 @@ import { useTranslation } from "react-i18next";
 import Cart from "../cart/Cart";
 import UserMenu from "./UserMenu";
 import { SearchMenu } from "./SearchMenu";
-
+import i18n from "i18n";
 
 const options = ["All Categories", "CAR", "Clothes", "Electronics"];
 
 function SearchBar() {
   const theme = useTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const desktop = useMediaQuery("(min-width:600px)");
 
@@ -33,9 +33,6 @@ function SearchBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-
-
 
   return (
     <Container sx={{ my: 3, display: "flex", justifyContent: "space-between", gap: 1 }}>
@@ -68,11 +65,12 @@ function SearchBar() {
           sx={{
             // @ts-ignore
             bgcolor: theme.palette.header.main,
-            borderBottomRightRadius: i18n.language == "ar" ? 0 : 22,
-            borderTopRightRadius: i18n.language == "ar" ? 0 : 22,
-            borderBottomLeftRadius: i18n.language == "ar" ? 22 : 0,
-            borderTopLeftRadius: i18n.language == "ar" ? 22 : 0,
+            borderBottomRightRadius: i18n.resolvedLanguage == "ar" ? 0 : 22,
+            borderTopRightRadius: i18n.resolvedLanguage == "ar" ? 0 : 22,
+            borderBottomLeftRadius: i18n.resolvedLanguage == "ar" ? 22 : 0,
+            borderTopLeftRadius: i18n.resolvedLanguage == "ar" ? 22 : 0,
             p: "0",
+            width: "100%",
           }}
         >
           <ListItem
@@ -105,11 +103,11 @@ function SearchBar() {
             "aria-labelledby": "lock-button",
             role: "listbox",
           }}
-          sx={{ ml: i18n.language === "ar" ? 1.25 : undefined }}
+          sx={{ ml: i18n.resolvedLanguage === "ar" ? 1.25 : undefined }}
         >
           {options.map((option, index) => (
             <MenuItem
-              sx={{ fontSize: "13px", direction: i18n.language === "ar" ? "rtl" : "ltr", minWidth: 130 }}
+              sx={{ fontSize: "13px", direction: i18n.resolvedLanguage === "ar" ? "rtl" : "ltr", minWidth: 130 }}
               key={option}
               selected={index === selectedIndex}
               onClick={(event) => handleMenuItemClick(event, index)}
@@ -124,13 +122,7 @@ function SearchBar() {
       <Stack direction={"row"} alignItems={"center"} gap={1}>
         <Cart />
 
-        {/* {desktop &&
-          <IconButton>
-            <Person2OutlinedIcon />
-          </IconButton>
-        } */}
-
-        <UserMenu />
+        {desktop && <UserMenu />}
       </Stack>
 
 

@@ -8,15 +8,14 @@ import AddIcon from "@mui/icons-material/Add";
 import Image from "next/image";
 import { StyledButton, StyledInput, StyledInputRoot } from "./muiCartCounterStyle";
 import { Box, useTheme } from "@mui/material";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "state/store";
 import { countChange } from "state/cartSlice";
 import { CartItem } from "app/types";
+import i18n from "i18n";
 
 function CartItem() {
     const theme = useTheme();
-    const { i18n } = useTranslation();
 
     const cartProducts = useSelector((state: RootState) => state.cart);
 
@@ -31,7 +30,7 @@ function CartItem() {
                             disableRipple
                             sx={{
                                 gap: 1,
-                                textAlign: i18n.language == "ar" ? "right" : "left",
+                                textAlign: i18n.resolvedLanguage == "ar" ? "right" : "left",
                                 cursor: "context-menu",
                                 "&:hover": {
                                     bgcolor:

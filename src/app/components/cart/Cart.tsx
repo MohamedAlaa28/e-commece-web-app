@@ -12,10 +12,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'state/store';
 import { cartToggle } from 'state/cartSlice';
 import { Anchor } from 'app/types';
+import i18n from 'i18n';
 
 function Cart() {
     const theme = useTheme();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -32,8 +33,8 @@ function Cart() {
     const [anchor, setAnchor] = useState<Anchor>('right');
 
     useEffect(() => {
-        i18n.language == "ar" ? setAnchor('left') : setAnchor('right');
-    }, [i18n.language])
+        i18n.resolvedLanguage == "ar" ? setAnchor('left') : setAnchor('right');
+    }, [i18n.resolvedLanguage])
 
     const [isHovered, setIsHovered] = useState(false);
 
@@ -67,11 +68,11 @@ function Cart() {
                     "& .MuiPaper-root": {
                         // @ts-ignore
                         bgcolor: theme.palette.mode === "dark" ? "#000" : "#fff",
-                        borderBottomLeftRadius: i18n.language === "ar" ? 0 : 8,
-                        borderTopLeftRadius: i18n.language === "ar" ? 0 : 8,
-                        borderBottomRightRadius: i18n.language === "ar" ? 8 : 0,
-                        borderTopRightRadius: i18n.language === "ar" ? 8 : 0,
-                        direction: i18n.language == "ar" ? "rtl" : "ltr",
+                        borderBottomLeftRadius: i18n.resolvedLanguage === "ar" ? 0 : 8,
+                        borderTopLeftRadius: i18n.resolvedLanguage === "ar" ? 0 : 8,
+                        borderBottomRightRadius: i18n.resolvedLanguage === "ar" ? 8 : 0,
+                        borderTopRightRadius: i18n.resolvedLanguage === "ar" ? 8 : 0,
+                        direction: i18n.resolvedLanguage == "ar" ? "rtl" : "ltr",
                         width: { xs: "100%", md: 375 },
                     },
                 }}

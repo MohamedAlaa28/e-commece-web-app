@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HomeItems, pagesItems, userAccountItems, vendorAccountItems } from "./NavBarDataLinks";
 import MenuIcon from "@mui/icons-material/Menu";
+import i18n from "i18n";
 
 const drawerItems = [
     { title: "Vendor Account", data: vendorAccountItems },
@@ -13,7 +14,7 @@ const drawerItems = [
 ];
 
 function NavBarMenu() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [state, setState] = useState({ top: false });
 
     const toggleDrawer = (anchor: 'top' | 'left' | 'bottom' | 'right', open: boolean) =>
@@ -57,8 +58,8 @@ function NavBarMenu() {
                             <AccordionSummary expandIcon={<ExpandMore />}>
                                 <Typography sx={{
                                     flexGrow: 1, display: "flex", alignItems: "center",
-                                    flexDirection: i18n.language === "ar" ? "right" : "left",
-                                    textAlign: i18n.language === "ar" ? "right" : "left"
+                                    flexDirection: i18n.resolvedLanguage === "ar" ? "right" : "left",
+                                    textAlign: i18n.resolvedLanguage === "ar" ? "right" : "left"
                                 }}>
                                     {t(drawerItem.title)}
                                 </Typography>
@@ -72,8 +73,8 @@ function NavBarMenu() {
                                                 <AccordionSummary expandIcon={<ExpandMore />}>
                                                     <ListItemText primary={t(item.title)} sx={{
                                                         flexGrow: 1, display: "flex", alignItems: "center",
-                                                        flexDirection: i18n.language === "ar" ? "right" : "left",
-                                                        textAlign: i18n.language === "ar" ? "right" : "left"
+                                                        flexDirection: i18n.resolvedLanguage === "ar" ? "right" : "left",
+                                                        textAlign: i18n.resolvedLanguage === "ar" ? "right" : "left"
                                                     }} />
                                                 </AccordionSummary>
                                                 <AccordionDetails>
@@ -87,8 +88,8 @@ function NavBarMenu() {
                                                                 <ListItemButton>
                                                                     <ListItemText primary={t(subLink.title)} sx={{
                                                                         flexGrow: 1, display: "flex", alignItems: "center",
-                                                                        flexDirection: i18n.language === "ar" ? "right" : "left",
-                                                                        textAlign: i18n.language === "ar" ? "right" : "left"
+                                                                        flexDirection: i18n.resolvedLanguage === "ar" ? "right" : "left",
+                                                                        textAlign: i18n.resolvedLanguage === "ar" ? "right" : "left"
                                                                     }} />
                                                                 </ListItemButton>
                                                             </ListItem>
@@ -103,7 +104,7 @@ function NavBarMenu() {
                                                     position: "relative",
                                                 }}>
                                                 <ListItemButton>
-                                                    <ListItemText primary={t(item.title)} sx={{ flexGrow: 1, textAlign: i18n.language === "ar" ? "right" : "left" }} />
+                                                    <ListItemText primary={t(item.title)} sx={{ flexGrow: 1, textAlign: i18n.resolvedLanguage === "ar" ? "right" : "left" }} />
                                                 </ListItemButton>
                                             </ListItem>
                                         )

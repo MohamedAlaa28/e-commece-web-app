@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Box, Container, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Stack, Typography, useTheme } from "@mui/material";
 import { DarkModeOutlined, ExpandMore, LightModeOutlined } from "@mui/icons-material";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -6,6 +6,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { ColorModeContext } from '../../../../public/mui/useMode';
 import { useTranslation } from "react-i18next";
+import i18n from 'i18n';
 
 const options = ["EN", "AR", "GR"];
 
@@ -16,7 +17,7 @@ const socialIcons = [
 ];
 
 function Header() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const colorMode = useContext(ColorModeContext);
     if (!colorMode) {
@@ -27,9 +28,14 @@ function Header() {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    const savedLanguage = localStorage.getItem('language');
-    const initialIndex = options.findIndex(option => option.toLowerCase() === savedLanguage?.toLowerCase());
-    const [selectedIndex, setSelectedIndex] = useState<number>(initialIndex >= 0 ? initialIndex : 0);
+    const [selectedIndex, setSelectedIndex] = useState<number>(0);
+
+    useEffect(() => {
+        // Access localStorage only after component mounts to ensure it's client-side
+        const savedLanguage = localStorage.getItem('language');
+        const initialIndex = options.findIndex(option => option.toLowerCase() === savedLanguage?.toLowerCase());
+        setSelectedIndex(initialIndex >= 0 ? initialIndex : 0);
+    }, []);
 
     const open = Boolean(anchorEl);
 

@@ -9,10 +9,11 @@ import "./sliderStyle.css";
 import IconsSection from './IconsSection';
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from 'react';
+import i18n from 'i18n';
 
 function Hero() {
     const theme = useTheme();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const sliderPages = [
         { text: t("MEN"), link: "/images/banner-15.jpg" },
@@ -47,7 +48,7 @@ function Hero() {
     useEffect(() => {
         // Reinitialize Swiper by changing key prop
         setKey(Math.random());
-    }, [i18n.language]);
+    }, [i18n.resolvedLanguage]);
     return (
         <Container>
             <Box sx={{ position: 'relative', display: "flex", alignItems: "center", gap: 2, mt: 2.5, pt: 2 }}>
@@ -57,14 +58,14 @@ function Hero() {
                         {
                             sliderPages.map((page) => (
                                 <SwiperSlide key={page.link} className='parent-slider'>
-                                    <Image src={page.link} alt='banner-16' fill style={{ transform: i18n.language != "ar" ? "scaleX(1)" : "scaleX(-1)" }} />
+                                    <Image src={page.link} alt='banner-16' fill style={{ transform: i18n.resolvedLanguage != "ar" ? "scaleX(1)" : "scaleX(-1)" }} />
                                     <Box
                                         sx={{
                                             [theme.breakpoints.up("sm")]: {
                                                 position: "absolute",
-                                                right: i18n.language == "ar" ? "10%" : undefined,
-                                                left: i18n.language != "ar" ? "10%" : undefined,
-                                                textAlign: i18n.language == "ar" ? " right" : "left",
+                                                right: i18n.resolvedLanguage == "ar" ? "10%" : undefined,
+                                                left: i18n.resolvedLanguage != "ar" ? "10%" : undefined,
+                                                textAlign: i18n.resolvedLanguage == "ar" ? " right" : "left",
                                             },
 
                                             [theme.breakpoints.down("sm")]: {
@@ -95,7 +96,7 @@ function Hero() {
 
                                         <Stack
                                             sx={{
-                                                justifyContent: { xs: "center", sm: i18n.language == "ar" ? " right" : "left" },
+                                                justifyContent: { xs: "center", sm: i18n.resolvedLanguage == "ar" ? " right" : "left" },
                                             }}
                                             direction={"row"}
                                             gap={1}
@@ -158,13 +159,13 @@ function Hero() {
                                 ...(index === banners.length - 1 ? { mb: 0 } : {}),
                             }}
                         >
-                            <Image src={banner.src} alt={banner.alt} fill style={{ transform: i18n.language != "ar" ? "scaleX(1)" : "scaleX(-1)" }} />
+                            <Image src={banner.src} alt={banner.alt} fill style={{ transform: i18n.resolvedLanguage != "ar" ? "scaleX(1)" : "scaleX(-1)" }} />
                             <Stack sx={{
                                 position: "absolute",
                                 top: "50%",
                                 transform: "translateY(-50%)",
-                                left: i18n.language != "ar" ? 31 : undefined,
-                                right: i18n.language == "ar" ? 31 : undefined,
+                                left: i18n.resolvedLanguage != "ar" ? 31 : undefined,
+                                right: i18n.resolvedLanguage == "ar" ? 31 : undefined,
                             }}>
                                 {banner.captions.map((caption, captionIndex) => (
                                     <Typography
@@ -194,7 +195,7 @@ function Hero() {
                                     underline="none"
                                 >
                                     {t("Shop now")}
-                                    <ArrowForwardIcon sx={{ fontSize: "13px", rotate: i18n.language == "ar" ? "180deg" : "0deg" }} />
+                                    <ArrowForwardIcon sx={{ fontSize: "13px", rotate: i18n.resolvedLanguage == "ar" ? "180deg" : "0deg" }} />
                                 </Link>
                             </Stack>
                         </Box>

@@ -6,10 +6,11 @@ import HeaderLinks from "../navBar/NavBarLinks";
 import { useTranslation } from "react-i18next";
 import { menuItems } from "./NavBarDataLinks";
 import NavBarMenu from "./NavBarMenu";
+import i18n from "i18n";
 
 function NavBar() {
   const theme = useTheme();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const desktop = useMediaQuery('(min-width:1200px)');
   const mobile = useMediaQuery('(max-width:1200px)');
@@ -55,7 +56,7 @@ function NavBar() {
           </Typography>
           <Box flexGrow={1} />
 
-          <KeyboardArrowRightOutlinedIcon sx={{ rotate: i18n.language == "ar" ? "180deg" : "0deg" }} />
+          <KeyboardArrowRightOutlinedIcon sx={{ rotate: i18n.resolvedLanguage == "ar" ? "180deg" : "0deg" }} />
         </Button>
 
         <Menu
@@ -75,7 +76,7 @@ function NavBar() {
           }}
         >
           {menuItems.map(({ text, Icon }, index) => (
-            <MenuItem key={index} onClick={handleClose} sx={{ direction: i18n.language === "ar" ? "rtl" : "ltr", textAlign: i18n.language === "ar" ? "right" : "left" }}>
+            <MenuItem key={index} onClick={handleClose} sx={{ direction: i18n.resolvedLanguage === "ar" ? "rtl" : "ltr", textAlign: i18n.resolvedLanguage === "ar" ? "right" : "left" }}>
               <ListItemIcon>
                 <Icon fontSize="small" />
               </ListItemIcon>
